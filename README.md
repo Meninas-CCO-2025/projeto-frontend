@@ -1,5 +1,7 @@
 📚 Atividade em Grupo — Desenvolvimento de Site com CI/CD
 
+Tema: Letterbox de música 
+
 🎓 Disciplina: Programação Frontend e DevOps 
 
 🎯 Objetivo
