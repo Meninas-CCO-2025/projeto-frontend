@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MusicBox — Início</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body class="app-body">
+
+  <!-- NAVBAR -->
+  <nav class="navbar-custom">
+    <span class="nav-logo">🎵 MusicBox</span>
+    <div class="nav-links">
+      <a href="app.html"            class="nav-item active"  title="Início">🏠</a>
+      <a href="pages/explorar.html" class="nav-item"         title="Explorar">🔍</a>
+      <a href="pages/busca.html"    class="nav-item"         title="Busca">🎶</a>
+      <a href="pages/favoritos.html"class="nav-item"         title="Favoritos">❤️</a>
+      <a href="pages/perfil.html"   class="nav-item"         title="Perfil">👤</a>
+    </div>
+  </nav>
+
+  <!-- CONTEÚDO -->
+  <main class="app-main">
+
+    <!-- Saudação -->
+    <div class="greeting mb-4">
+      <h2 class="greeting-title">Olá, <span id="nome-usuario">usuário</span> 👋</h2>
+      <p class="greeting-sub">O que você ouviu hoje?</p>
+    </div>
+
+    <!-- RECENTES -->
+    <section class="mb-5">
+      <h3 class="section-title">🕐 Recentes</h3>
+      <div class="scroll-row" id="recentes-container">
+
+        <div class="music-card">
+          <div class="music-cover" style="background:#DB023D">🎸</div>
+          <p class="music-title">Bohemian Rhapsody</p>
+          <p class="music-artist">Queen</p>
+        </div>
+
+        <div class="music-card">
+          <div class="music-cover" style="background:#FF6347">🎹</div>
+          <p class="music-title">Blinding Lights</p>
+          <p class="music-artist">The Weeknd</p>
+        </div>
+
+        <div class="music-card">
+          <div class="music-cover" style="background:#6a0dad">🎤</div>
+          <p class="music-title">As It Was</p>
+          <p class="music-artist">Harry Styles</p>
+        </div>
+
+        <div class="music-card">
+          <div class="music-cover" style="background:#1a6b3c">🥁</div>
+          <p class="music-title">Flowers</p>
+          <p class="music-artist">Miley Cyrus</p>
+        </div>
+
+        <div class="music-card">
+          <div class="music-cover" style="background:#8B0000">🎺</div>
+          <p class="music-title">Anti-Hero</p>
+          <p class="music-artist">Taylor Swift</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- REVIEWS RECENTES -->
+    <section class="mb-5">
+      <h3 class="section-title">⭐ Reviews recentes</h3>
+      <div id="reviews-container">
+
+        <div class="review-card">
+          <div class="review-header">
+            <div class="review-avatar">🎧</div>
+            <div>
+              <p class="review-user">@glorinha</p>
+              <p class="review-music">Bohemian Rhapsody — Queen</p>
+            </div>
+            <div class="review-stars ms-auto">★★★★★</div>
+          </div>
+          <p class="review-text">"Uma obra-prima atemporal. Cada vez que ouço parece a primeira vez."</p>
+        </div>
+
+        <div class="review-card">
+          <div class="review-header">
+            <div class="review-avatar">🎵</div>
+            <div>
+              <p class="review-user">@musiclover</p>
+              <p class="review-music">Blinding Lights — The Weeknd</p>
+            </div>
+            <div class="review-stars ms-auto">★★★★☆</div>
+          </div>
+          <p class="review-text">"Synthwave perfeito. Impossível não dançar."</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- PLAYLISTS -->
+    <section class="mb-5">
+      <h3 class="section-title">🎼 Minhas playlists</h3>
+      <div class="scroll-row" id="playlists-container">
+
+        <div class="playlist-card">
+          <div class="playlist-cover">🔥</div>
+          <p class="playlist-name">Favoritas</p>
+          <p class="playlist-count">12 músicas</p>
+        </div>
+
+        <div class="playlist-card">
+          <div class="playlist-cover">🌙</div>
+          <p class="playlist-name">Noturnas</p>
+          <p class="playlist-count">8 músicas</p>
+        </div>
+
+        <div class="playlist-card">
+          <div class="playlist-cover">☀️</div>
+          <p class="playlist-name">Manhã</p>
+          <p class="playlist-count">6 músicas</p>
+        </div>
+
+        <div class="playlist-card">
+          <div class="playlist-cover">💪</div>
+          <p class="playlist-name">Treino</p>
+          <p class="playlist-count">15 músicas</p>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- BOTÃO FLUTUANTE (FAB) -->
+  <button class="fab" onclick="abrirModal()" title="Adicionar review">+</button>
+
+  <!-- MODAL: Nova Review -->
+  <div class="modal-overlay" id="modal-review" style="display:none">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h5>Nova review</h5>
+        <button class="modal-close" onclick="fecharModal()">✕</button>
+      </div>
+      <input type="text" class="custom-input mb-3" placeholder="Nome da música" id="rev-musica"/>
+      <input type="text" class="custom-input mb-3" placeholder="Artista" id="rev-artista"/>
+      <div class="star-selector mb-3">
+        <span class="star" onclick="setStar(1)">★</span>
+        <span class="star" onclick="setStar(2)">★</span>
+        <span class="star" onclick="setStar(3)">★</span>
+        <span class="star" onclick="setStar(4)">★</span>
+        <span class="star" onclick="setStar(5)">★</span>
+      </div>
+      <textarea class="custom-input mb-3" rows="3" placeholder="O que você achou?" id="rev-texto"></textarea>
+      <button class="btn btn-primary w-100" onclick="salvarReview()">Publicar review</button>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

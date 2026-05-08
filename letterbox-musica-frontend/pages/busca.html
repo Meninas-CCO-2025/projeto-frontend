@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MusicBox — Busca</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="../css/style.css"/>
+</head>
+<body class="app-body">
+
+  <nav class="navbar-custom">
+    <span class="nav-logo">🎵 MusicBox</span>
+    <div class="nav-links">
+      <a href="../app.html"    class="nav-item"        title="Início">🏠</a>
+      <a href="explorar.html"  class="nav-item"        title="Explorar">🔍</a>
+      <a href="busca.html"     class="nav-item active" title="Busca">🎶</a>
+      <a href="favoritos.html" class="nav-item"        title="Favoritos">❤️</a>
+      <a href="perfil.html"    class="nav-item"        title="Perfil">👤</a>
+    </div>
+  </nav>
+
+  <main class="app-main">
+    <h2 class="greeting-title mb-1">Busca 🎶</h2>
+    <p class="greeting-sub mb-4">Encontre músicas, artistas ou reviews</p>
+
+    <!-- Campo de busca -->
+    <div class="busca-wrapper mb-4">
+      <input type="text" id="campo-busca" class="custom-input busca-input"
+        placeholder="Digite uma música ou artista..." oninput="buscar()"/>
+      <span class="busca-icon">🔍</span>
+    </div>
+
+    <!-- Resultados -->
+    <div id="resultados"></div>
+
+    <!-- Estado vazio -->
+    <div id="estado-vazio" class="vazio-box">
+      <p style="font-size:2.5rem">🎵</p>
+      <p style="color:var(--text-muted)">Comece digitando para buscar</p>
+    </div>
+  </main>
+
+  <script src="../js/main.js"></script>
+  <script src="../js/busca.js"></script>
+</body>
+</html>
