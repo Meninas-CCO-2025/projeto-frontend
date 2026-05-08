@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MusicBox — Perfil</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="../css/style.css"/>
+</head>
+<body class="app-body">
+
+  <nav class="navbar-custom">
+    <a href="../app.html" class="nav-logo">◉ Vinyl</a>
+    <div class="nav-links">
+      <a href="explorar.html"  class="nav-item">🔥 Explorar</a>
+      <a href="busca.html"     class="nav-item">🔍 Buscar</a>
+      <a href="favoritos.html" class="nav-item">❤️ Favoritos</a>
+      <a href="perfil.html"    class="nav-item active" style="color:var(--btn)">👤 Perfil</a>
+      <a href="javascript:logout()" class="nav-item">🚪 Sair</a>
+    </div>
+  </nav>
+
+  <main class="app-main">
+
+    <!-- Avatar + info -->
+    <div class="perfil-header">
+      <div class="perfil-avatar">🎧</div>
+      <div style="flex:1">
+        <h2 class="perfil-nome" id="perfil-nome">@usuario</h2>
+        <p class="perfil-email" id="perfil-email">email@exemplo.com</p>
+        
+      </div>
+      <button class="btn btn-secondary" onclick="abrirModalConfig()">⚙️</button>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-row mb-5">
+      <div class="stat-box">
+        <span class="stat-num" id="stat-reviews">0</span>
+        <span class="stat-label">Reviews</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-num" id="stat-playlists">0</span>
+        <span class="stat-label">Playlists</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-num">0</span>
+        <span class="stat-label">Favoritos</span>
+      </div>
+    </div>
+
+    <!-- ABAS DO PERFIL -->
+   <div class="perfil-tabs mb-4">
+  <button class="perfil-tab active" onclick="mostrarAba('reviews')">⭐ Reviews</button>
+  <button class="perfil-tab" onclick="mostrarAba('playlists')">🎼 Playlists</button>
+</div>
+
+    <!-- ABA: REVIEWS -->
+    <div id="aba-reviews">
+      <div id="perfil-reviews-container">
+        <div class="vazio-box" id="reviews-vazio">
+          <p style="font-size:2rem">⭐</p>
+          <p style="color:var(--text-muted)">Você ainda não fez nenhuma review.</p>
+          <a href="../app.html" class="btn btn-primary mt-3" style="border-radius:50px;padding:10px 24px">
+            Fazer primeira review
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ABA: PLAYLISTS -->
+    <div id="aba-playlists" style="display:none">
+      <div class="playlists-grid" id="perfil-playlists-container">
+        <div class="vazio-box" id="playlists-vazio">
+          <p style="font-size:2rem">🎼</p>
+          <p style="color:var(--text-muted)">Você ainda não criou playlists.</p>
+          <a href="../app.html" class="btn btn-primary mt-3" style="border-radius:50px;padding:10px 24px">
+            Criar playlist
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Modal: confirmar deleção -->
+  <div class="modal-overlay" id="modal-deletar" style="display:none">
+    <div class="modal-box" style="text-align:center">
+      <p style="font-size:2.5rem;margin-bottom:8px">⚠️</p>
+      <h5 style="color:var(--btn);margin-bottom:8px">Deletar conta</h5>
+      <p style="color:#ccc;font-size:0.9rem;margin-bottom:24px">
+        Tem certeza? Todos os seus dados serão apagados.
+      </p>
+      <button class="btn btn-danger-custom w-100 mb-2" onclick="deletarConta()">
+        Sim, deletar minha conta
+      </button>
+      <button class="btn btn-secondary w-100" onclick="fecharModalDeletar()">Cancelar</button>
+    </div>
+  </div>
+
+  <!-- Modal: confirmar deleção de playlist -->
+  <div class="modal-overlay" id="modal-del-playlist" style="display:none">
+    <div class="modal-box" style="text-align:center">
+      <p style="font-size:2rem;margin-bottom:8px">🗑️</p>
+      <h5 style="color:var(--btn);margin-bottom:8px">Apagar playlist?</h5>
+      <p style="color:#ccc;font-size:0.9rem;margin-bottom:24px">Esta ação não pode ser desfeita.</p>
+      <button class="btn btn-danger-custom w-100 mb-2" onclick="confirmarDelPlaylist()">Sim, apagar</button>
+      <button class="btn btn-secondary w-100" onclick="fecharModalPlaylist()">Cancelar</button>
+    </div>
+  </div>
+
+  <!-- Modal: Configurações -->
+<div class="modal-overlay" id="modal-config" style="display:none">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h5>⚙️ Configurações</h5>
+      <button class="modal-close" onclick="fecharModalConfig()">✕</button>
+    </div>
+
+    <!-- Alterar nome -->
+    <div class="config-grupo">
+      <label class="form-label">👤 Alterar nome de usuário</label>
+      <input type="text" class="custom-input mb-2" id="novo-nome" placeholder="Novo nome de usuário"/>
+      <button class="btn btn-primary w-100" onclick="salvarNome()">Salvar nome</button>
+      <p id="msg-nome" class="erro-msg mt-1"></p>
+    </div>
+
+    <!-- Alterar email -->
+    <div class="config-grupo">
+      <label class="form-label">✉️ Alterar e-mail</label>
+      <input type="email" class="custom-input mb-2" id="novo-email" placeholder="Novo e-mail"/>
+      <button class="btn btn-primary w-100" onclick="salvarEmail()">Salvar e-mail</button>
+      <p id="msg-email" class="erro-msg mt-1"></p>
+    </div>
+
+    <!-- Deletar conta -->
+    <div class="config-grupo" style="border:1px solid rgba(219,2,61,0.3);border-radius:12px;padding:16px">
+      <p class="form-label" style="color:var(--btn)">⚠️ Zona de perigo</p>
+      <p style="color:var(--text-muted);font-size:0.82rem;margin-bottom:12px">
+        Todos os seus dados serão apagados permanentemente.
+      </p>
+      <button class="btn btn-danger-custom w-100" onclick="confirmarDelecao()">
+        🗑️ Deletar minha conta
+      </button>
+    </div>
+
+  </div>
+</div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/perfil.js"></script>
+</body>
+</html>

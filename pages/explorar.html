@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MusicBox — Explorar</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="../css/style.css"/>
+</head>
+<body class="app-body">
+
+  <nav class="navbar-custom">
+    <a href="../app.html" class="nav-logo">◉ Vinyl</a>
+    <div class="nav-links">
+
+      <a href="explorar.html"  class="nav-item active" style="color:var(--btn)">🔥 Explorar</a>
+      <a href="busca.html"     class="nav-item">🔍 Buscar</a>
+      <a href="favoritos.html" class="nav-item">❤️ Favoritos</a>
+      <a href="perfil.html"    class="nav-item">👤 Perfil</a>
+      <a href="javascript:logout()" class="nav-item">🚪 Sair</a>
+    </div>
+  </nav>
+
+  <main class="app-main">
+    <div class="section-header">
+      <h2>🔥 Explorar</h2>
+      <p>Descubra e avalie músicas.</p>
+    </div>
+
+    <!-- Gêneros -->
+    <h3 class="section-title">🎸 Gêneros</h3>
+    <div class="grid-container mb-5">
+      <div class="genre-pill" style="background:linear-gradient(135deg, #DB023D, #e81856)">Rock</div>
+      <div class="genre-pill" style="background:linear-gradient(135deg, #6a0dad, #7d1f9d)">Pop</div>
+      <div class="genre-pill" style="background:linear-gradient(135deg, #FF6347, #ff5530)">Hip-Hop</div>
+      <div class="genre-pill" style="background:linear-gradient(135deg, #1a6b3c, #2a8b4c)">Jazz</div>
+      <div class="genre-pill" style="background:linear-gradient(135deg, #1e6f9c, #2e8fbc)">Eletrônico</div>
+      <div class="genre-pill" style="background:linear-gradient(135deg, #8B0000, #ab2000)">Metal</div>
+      <div class="genre-pill" style="background:linear-gradient(135deg, #c47a00, #e49a00)">Sertanejo</div>
+      <div class="genre-pill" style="background:linear-gradient(135deg, #4a2060, #6a3080)">R&B</div>
+    </div>
+
+    <!-- Top reviews -->
+    <h3 class="section-title">🏆 Top reviews da semana</h3>
+
+    <div class="review-card">
+      <div class="review-header">
+        <div class="review-avatar">🎵</div>
+        <div>
+          <p class="review-user">@beatriz</p>
+          <p class="review-music">Midnights — Taylor Swift</p>
+        </div>
+        <div class="review-stars ms-auto">★★★★★</div>
+      </div>
+      <p class="review-text">"Álbum que marca uma nova era. Cada faixa conta uma história."</p>
+    </div>
+
+    <div class="review-card">
+      <div class="review-header">
+        <div class="review-avatar">🎤</div>
+        <div>
+          <p class="review-user">@carlos_m</p>
+          <p class="review-music">Renaissance — Beyoncé</p>
+        </div>
+        <div class="review-stars ms-auto">★★★★★</div>
+      </div>
+      <p class="review-text">"Uma celebração da música Black. Beyoncé em outro nível."</p>
+    </div>
+
+    <div class="review-card">
+      <div class="review-header">
+        <div class="review-avatar">🥁</div>
+        <div>
+          <p class="review-user">@fernanda</p>
+          <p class="review-music">SOS — SZA</p>
+        </div>
+        <div class="review-stars ms-auto">★★★★☆</div>
+      </div>
+      <p class="review-text">"R&B alternativo perfeito. Faixa após faixa sem skip."</p>
+    </div>
+
+  </main>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>
