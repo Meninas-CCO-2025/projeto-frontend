@@ -1,10 +1,10 @@
 :root {
-  --bg: #2C2352;
-  --bg2: #1e1840;
-  --btn: #DB023D;
+  --bg: #1a1628;
+  --bg2: #0f0d1a;
+  --btn: #e81856;
   --accent: #FF6347;
-  --card-bg: #3a2f6e;
-  --input-bg: #251d4a;
+  --card-bg: #2a2540;
+  --input-bg: #1f1a35;
   --text-muted: #a89ec9;
 }
 
@@ -147,35 +147,70 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 14px 24px;
+  padding: 16px 32px;
   position: sticky;
   top: 0;
   z-index: 100;
-  border-bottom: 1px solid #3a2f6e;
+  border-bottom: 1px solid #2a2540;
+  backdrop-filter: blur(10px);
 }
 
 .nav-logo {
-  color: var(--accent);
+  color: var(--btn);
   font-weight: 700;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
-.nav-links { display: flex; gap: 20px; }
+.nav-links { 
+  display: flex; 
+  gap: 32px; 
+  align-items: center;
+}
 
 .nav-item {
-  font-size: 1.4rem;
   text-decoration: none;
-  opacity: 0.5;
-  transition: opacity 0.2s, transform 0.2s;
+  color: #fff;
+  font-weight: 500;
+  font-size: 0.95rem;
+  opacity: 0.7;
+  transition: opacity 0.2s, color 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .nav-item:hover, .nav-item.active {
   opacity: 1;
-  transform: scale(1.15);
+  color: var(--btn);
 }
 
 /* MAIN */
-.app-main { padding: 24px 20px; max-width: 700px; margin: 0 auto; }
+.app-main { 
+  padding: 48px 32px; 
+  max-width: 1400px; 
+  margin: 0 auto; 
+}
+
+/* SECTION HEADER */
+.section-header {
+  margin-bottom: 36px;
+}
+
+.section-header h2 {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #fff;
+  margin: 0 0 8px 0;
+}
+
+.section-header p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin: 0;
+}
 
 /* Saudação */
 .greeting-title { font-size: 1.5rem; font-weight: 700; color: #fff; }
@@ -183,48 +218,118 @@ body {
 
 /* Títulos de seção */
 .section-title {
-  font-size: 1rem;
+  font-size: 1.2rem;
   font-weight: 700;
-  color: var(--accent);
-  margin-bottom: 14px;
-  text-transform: uppercase;
+  color: #fff;
+  margin-bottom: 20px;
+  text-transform: capitalize;
   letter-spacing: 0.05em;
 }
 
-/* CARDS DE MÚSICA */
+/* GRID DE CARDS */
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 20px;
+  margin-bottom: 48px;
+}
+
+@media (max-width: 1024px) {
+  .grid-container {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 16px;
+  }
+}
+
+@media (max-width: 640px) {
+  .grid-container {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 12px;
+  }
+  .app-main {
+    padding: 24px 16px;
+  }
+}
+
+/* SCROLL ROW (para compatibilidade) */
 .scroll-row {
   display: flex;
   gap: 14px;
   overflow-x: auto;
   padding-bottom: 8px;
   scrollbar-width: thin;
-  scrollbar-color: var(--btn) transparent;
 }
 
+
+/* CARDS DE MÚSICA */
 .music-card {
   flex: 0 0 120px;
   background: var(--card-bg);
   border-radius: 12px;
-  padding: 12px;
+  padding: 0;
   cursor: pointer;
-  transition: transform 0.2s;
+  transition: transform 0.3s, box-shadow 0.3s;
+  overflow: hidden;
+  position: relative;
+  aspect-ratio: 1;
 }
 
-.music-card:hover { transform: translateY(-4px); }
+.music-card:hover { 
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(232, 24, 86, 0.3);
+}
 
 .music-cover {
-  width: 96px;
-  height: 96px;
-  border-radius: 10px;
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 2.2rem;
-  margin-bottom: 8px;
+  font-size: 3rem;
+  position: relative;
+  overflow: hidden;
 }
 
-.music-title  { font-size: 0.8rem; font-weight: 600; color: #fff; margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.music-artist { font-size: 0.75rem; color: var(--text-muted); margin: 0; }
+.music-card .music-title  { 
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+  padding: 12px 8px 8px 8px;
+  font-size: 0.8rem; 
+  font-weight: 600; 
+  color: #fff; 
+  margin: 0;
+  white-space: wrap;
+  text-align: center;
+}
+
+.music-card .music-artist { 
+  display: none;
+}
+
+.music-card-favorite {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 32px;
+  height: 32px;
+  background: rgba(0,0,0,0.5);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  cursor: pointer;
+  z-index: 10;
+  transition: background 0.2s;
+}
+
+.music-card-favorite:hover {
+  background: rgba(0,0,0,0.7);
+}
 
 /* REVIEW CARDS */
 .review-card {
@@ -475,17 +580,21 @@ body {
 
 /* GÊNEROS */
 .genre-pill {
-  flex: 0 0 auto;
-  padding: 10px 20px;
-  border-radius: 50px;
+  padding: 16px 20px;
+  border-radius: 12px;
   color: #fff;
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   cursor: pointer;
-  transition: transform 0.2s, opacity 0.2s;
+  transition: transform 0.2s, opacity 0.2s, box-shadow 0.2s;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
 }
 
-.genre-pill:hover { transform: scale(1.05); opacity: 0.9; }
+.genre-pill:hover { 
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+}
 
 /* LANDING PAGE */
 .hero-section {

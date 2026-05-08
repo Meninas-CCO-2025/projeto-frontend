@@ -11,13 +11,13 @@
 
   <!-- NAVBAR -->
   <nav class="navbar-custom">
-    <span class="nav-logo">🎵 MusicBox</span>
+    <span class="nav-logo">◉ Vinyl</span>
     <div class="nav-links">
-      <a href="app.html"            class="nav-item active"  title="Início">🏠</a>
-      <a href="pages/explorar.html" class="nav-item"         title="Explorar">🔍</a>
-      <a href="pages/busca.html"    class="nav-item"         title="Busca">🎶</a>
-      <a href="pages/favoritos.html"class="nav-item"         title="Favoritos">❤️</a>
-      <a href="pages/perfil.html"   class="nav-item"         title="Perfil">👤</a>
+      <a href="pages/explorar.html" class="nav-item">🔥 Explorar</a>
+      <a href="pages/busca.html"    class="nav-item">🔍 Buscar</a>
+      <a href="pages/favoritos.html"class="nav-item">❤️ Favoritos</a>
+      <a href="pages/perfil.html"   class="nav-item">👤 Perfil</a>
+      <a href="javascript:logout()" class="nav-item">🚪 Sair</a>
     </div>
   </nav>
 
@@ -25,108 +25,82 @@
   <main class="app-main">
 
     <!-- Saudação -->
-    <div class="greeting mb-4">
-      <h2 class="greeting-title">Olá, <span id="nome-usuario">usuário</span> 👋</h2>
-      <p class="greeting-sub">O que você ouviu hoje?</p>
+    <div class="section-header">
+      <h2 id="nome-usuario">Bem-vindo!</h2>
+      <p>Descubra e avalie suas músicas favoritas.</p>
     </div>
 
     <!-- RECENTES -->
-    <section class="mb-5">
+    <section>
       <h3 class="section-title">🕐 Recentes</h3>
-      <div class="scroll-row" id="recentes-container">
+      <div class="grid-container" id="recentes-container">
 
-        <div class="music-card">
-          <div class="music-cover" style="background:#DB023D">🎸</div>
+        <div class="music-card" onclick="exigirLogin()">
+          <div class="music-cover" style="background:linear-gradient(135deg, #DB023D, #e81856)">🎸</div>
           <p class="music-title">Bohemian Rhapsody</p>
-          <p class="music-artist">Queen</p>
+          <span class="music-card-favorite">🤍</span>
         </div>
 
-        <div class="music-card">
-          <div class="music-cover" style="background:#FF6347">🎹</div>
+        <div class="music-card" onclick="exigirLogin()">
+          <div class="music-cover" style="background:linear-gradient(135deg, #FF6347, #ff5530)">🎹</div>
           <p class="music-title">Blinding Lights</p>
-          <p class="music-artist">The Weeknd</p>
+          <span class="music-card-favorite">🤍</span>
         </div>
 
-        <div class="music-card">
-          <div class="music-cover" style="background:#6a0dad">🎤</div>
+        <div class="music-card" onclick="exigirLogin()">
+          <div class="music-cover" style="background:linear-gradient(135deg, #6a0dad, #7d1f9d)">🎤</div>
           <p class="music-title">As It Was</p>
-          <p class="music-artist">Harry Styles</p>
+          <span class="music-card-favorite">🤍</span>
         </div>
 
-        <div class="music-card">
-          <div class="music-cover" style="background:#1a6b3c">🥁</div>
+        <div class="music-card" onclick="exigirLogin()">
+          <div class="music-cover" style="background:linear-gradient(135deg, #1a6b3c, #2a8b4c)">🥁</div>
           <p class="music-title">Flowers</p>
-          <p class="music-artist">Miley Cyrus</p>
+          <span class="music-card-favorite">🤍</span>
         </div>
 
-        <div class="music-card">
-          <div class="music-cover" style="background:#8B0000">🎺</div>
+        <div class="music-card" onclick="exigirLogin()">
+          <div class="music-cover" style="background:linear-gradient(135deg, #8B0000, #ab2000)">🎺</div>
           <p class="music-title">Anti-Hero</p>
-          <p class="music-artist">Taylor Swift</p>
+          <span class="music-card-favorite">🤍</span>
+        </div>
+
+        <div class="music-card" onclick="exigirLogin()">
+          <div class="music-cover" style="background:linear-gradient(135deg, #FF1493, #ff3da3)">👑</div>
+          <p class="music-title">Renaissance</p>
+          <span class="music-card-favorite">🤍</span>
         </div>
 
       </div>
     </section>
 
-    <!-- REVIEWS RECENTES -->
-    <section class="mb-5">
-      <h3 class="section-title">⭐ Reviews recentes</h3>
-      <div id="reviews-container">
+    <!-- FAVORITAS -->
+    <section>
+      <h3 class="section-title">❤️ Favoritas</h3>
+      <div class="grid-container">
 
-        <div class="review-card">
-          <div class="review-header">
-            <div class="review-avatar">🎧</div>
-            <div>
-              <p class="review-user">@glorinha</p>
-              <p class="review-music">Bohemian Rhapsody — Queen</p>
-            </div>
-            <div class="review-stars ms-auto">★★★★★</div>
-          </div>
-          <p class="review-text">"Uma obra-prima atemporal. Cada vez que ouço parece a primeira vez."</p>
+        <div class="music-card" onclick="exigirLogin()">
+          <div class="music-cover" style="background:linear-gradient(135deg, #4a2060, #6a3080)">💜</div>
+          <p class="music-title">SOS</p>
+          <span class="music-card-favorite">❤️</span>
         </div>
 
-        <div class="review-card">
-          <div class="review-header">
-            <div class="review-avatar">🎵</div>
-            <div>
-              <p class="review-user">@musiclover</p>
-              <p class="review-music">Blinding Lights — The Weeknd</p>
-            </div>
-            <div class="review-stars ms-auto">★★★★☆</div>
-          </div>
-          <p class="review-text">"Synthwave perfeito. Impossível não dançar."</p>
+        <div class="music-card" onclick="exigirLogin()">
+          <div class="music-cover" style="background:linear-gradient(135deg, #1e6f9c, #2e8fbc)">✨</div>
+          <p class="music-title">Levitating</p>
+          <span class="music-card-favorite">❤️</span>
         </div>
 
-      </div>
-    </section>
-
-    <!-- PLAYLISTS -->
-    <section class="mb-5">
-      <h3 class="section-title">🎼 Minhas playlists</h3>
-      <div class="scroll-row" id="playlists-container">
-
-        <div class="playlist-card">
-          <div class="playlist-cover">🔥</div>
-          <p class="playlist-name">Favoritas</p>
-          <p class="playlist-count">12 músicas</p>
+        <div class="music-card" onclick="exigirLogin()">
+          <div class="music-cover" style="background:linear-gradient(135deg, #c47a00, #e49a00)">🌟</div>
+          <p class="music-title">Essence</p>
+          <span class="music-card-favorite">❤️</span>
         </div>
 
-        <div class="playlist-card">
-          <div class="playlist-cover">🌙</div>
-          <p class="playlist-name">Noturnas</p>
-          <p class="playlist-count">8 músicas</p>
-        </div>
-
-        <div class="playlist-card">
-          <div class="playlist-cover">☀️</div>
-          <p class="playlist-name">Manhã</p>
-          <p class="playlist-count">6 músicas</p>
-        </div>
-
-        <div class="playlist-card">
-          <div class="playlist-cover">💪</div>
-          <p class="playlist-name">Treino</p>
-          <p class="playlist-count">15 músicas</p>
+        <div class="music-card" onclick="exigirLogin()">
+          <div class="music-cover" style="background:linear-gradient(135deg, #1a1e3d, #3a3e5d)">🎼</div>
+          <p class="music-title">Midnight</p>
+          <span class="music-card-favorite">❤️</span>
         </div>
 
       </div>

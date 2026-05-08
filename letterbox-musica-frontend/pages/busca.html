@@ -10,22 +10,25 @@
 <body class="app-body">
 
   <nav class="navbar-custom">
-    <span class="nav-logo">🎵 MusicBox</span>
+    <span class="nav-logo">◉ Vinyl</span>
     <div class="nav-links">
-      <a href="../app.html"    class="nav-item"        title="Início">🏠</a>
-      <a href="explorar.html"  class="nav-item"        title="Explorar">🔍</a>
-      <a href="busca.html"     class="nav-item active" title="Busca">🎶</a>
-      <a href="favoritos.html" class="nav-item"        title="Favoritos">❤️</a>
-      <a href="perfil.html"    class="nav-item"        title="Perfil">👤</a>
+      <a href="../app.html"    class="nav-item">🏠 Início</a>
+      <a href="explorar.html"  class="nav-item">🔥 Explorar</a>
+      <a href="busca.html"     class="nav-item active" style="color:var(--btn)">🔍 Buscar</a>
+      <a href="favoritos.html" class="nav-item">❤️ Favoritos</a>
+      <a href="perfil.html"    class="nav-item">👤 Perfil</a>
+      <a href="javascript:logout()" class="nav-item">🚪 Sair</a>
     </div>
   </nav>
 
   <main class="app-main">
-    <h2 class="greeting-title mb-1">Busca 🎶</h2>
-    <p class="greeting-sub mb-4">Encontre músicas, artistas ou reviews</p>
+    <div class="section-header">
+      <h2>🔍 Buscar</h2>
+      <p>Encontre suas músicas favoritas.</p>
+    </div>
 
     <!-- Campo de busca -->
-    <div class="busca-wrapper mb-4">
+    <div class="busca-wrapper mb-5">
       <input type="text" id="campo-busca" class="custom-input busca-input"
         placeholder="Digite uma música ou artista..." oninput="buscar()"/>
       <span class="busca-icon">🔍</span>

@@ -10,31 +10,34 @@
 <body class="app-body">
 
   <nav class="navbar-custom">
-    <span class="nav-logo">🎵 MusicBox</span>
+    <span class="nav-logo">◉ Vinyl</span>
     <div class="nav-links">
-      <a href="../app.html"    class="nav-item"        title="Início">🏠</a>
-      <a href="explorar.html"  class="nav-item active" title="Explorar">🔍</a>
-      <a href="busca.html"     class="nav-item"        title="Busca">🎶</a>
-      <a href="favoritos.html" class="nav-item"        title="Favoritos">❤️</a>
-      <a href="perfil.html"    class="nav-item"        title="Perfil">👤</a>
+      <a href="../app.html"    class="nav-item">🏠 Início</a>
+      <a href="explorar.html"  class="nav-item active" style="color:var(--btn)">🔥 Explorar</a>
+      <a href="busca.html"     class="nav-item">🔍 Buscar</a>
+      <a href="favoritos.html" class="nav-item">❤️ Favoritos</a>
+      <a href="perfil.html"    class="nav-item">👤 Perfil</a>
+      <a href="javascript:logout()" class="nav-item">🚪 Sair</a>
     </div>
   </nav>
 
   <main class="app-main">
-    <h2 class="greeting-title mb-1">Explorar 🔍</h2>
-    <p class="greeting-sub mb-4">Descubra músicas e reviews da comunidade</p>
+    <div class="section-header">
+      <h2>🔥 Explorar</h2>
+      <p>Descubra e avalie músicas.</p>
+    </div>
 
     <!-- Gêneros -->
     <h3 class="section-title">🎸 Gêneros</h3>
-    <div class="scroll-row mb-5">
-      <div class="genre-pill" style="background:#DB023D">Rock</div>
-      <div class="genre-pill" style="background:#6a0dad">Pop</div>
-      <div class="genre-pill" style="background:#FF6347">Hip-Hop</div>
-      <div class="genre-pill" style="background:#1a6b3c">Jazz</div>
-      <div class="genre-pill" style="background:#1e6f9c">Eletrônico</div>
-      <div class="genre-pill" style="background:#8B0000">Metal</div>
-      <div class="genre-pill" style="background:#c47a00">Sertanejo</div>
-      <div class="genre-pill" style="background:#4a2060">R&B</div>
+    <div class="grid-container mb-5">
+      <div class="genre-pill" style="background:linear-gradient(135deg, #DB023D, #e81856)">Rock</div>
+      <div class="genre-pill" style="background:linear-gradient(135deg, #6a0dad, #7d1f9d)">Pop</div>
+      <div class="genre-pill" style="background:linear-gradient(135deg, #FF6347, #ff5530)">Hip-Hop</div>
+      <div class="genre-pill" style="background:linear-gradient(135deg, #1a6b3c, #2a8b4c)">Jazz</div>
+      <div class="genre-pill" style="background:linear-gradient(135deg, #1e6f9c, #2e8fbc)">Eletrônico</div>
+      <div class="genre-pill" style="background:linear-gradient(135deg, #8B0000, #ab2000)">Metal</div>
+      <div class="genre-pill" style="background:linear-gradient(135deg, #c47a00, #e49a00)">Sertanejo</div>
+      <div class="genre-pill" style="background:linear-gradient(135deg, #4a2060, #6a3080)">R&B</div>
     </div>
 
     <!-- Top reviews -->
