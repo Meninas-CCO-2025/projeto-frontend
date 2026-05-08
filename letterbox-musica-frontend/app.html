@@ -134,14 +134,29 @@
 
   </main>
 
-  <!-- BOTÃO FLUTUANTE (FAB) -->
-  <button class="fab" onclick="abrirModal()" title="Adicionar review">+</button>
+<!-- BOTÃO FLUTUANTE -->
+<button class="fab" onclick="toggleFabMenu()" title="Adicionar" id="fab-btn">+</button>
 
-  <!-- MODAL: Nova Review -->
-  <div class="modal-overlay" id="modal-review" style="display:none">
-    <div class="modal-box">
+<!-- MENU DO FAB -->
+<div class="fab-menu" id="fab-menu" style="display:none">
+  <button class="fab-option" onclick="abrirModal('review')">
+    <span class="fab-option-icon">⭐</span>
+    <span class="fab-option-label">Nova review</span>
+  </button>
+  <button class="fab-option" onclick="abrirModal('playlist')">
+    <span class="fab-option-icon">🎼</span>
+    <span class="fab-option-label">Nova playlist</span>
+  </button>
+</div>
+
+<!-- MODAL UNIFICADO -->
+<div class="modal-overlay" id="modal-principal" style="display:none">
+  <div class="modal-box">
+
+    <!-- REVIEW -->
+    <div id="conteudo-review">
       <div class="modal-header">
-        <h5>Nova review</h5>
+        <h5>Nova review ⭐</h5>
         <button class="modal-close" onclick="fecharModal()">✕</button>
       </div>
       <input type="text" class="custom-input mb-3" placeholder="Nome da música" id="rev-musica"/>
@@ -156,7 +171,32 @@
       <textarea class="custom-input mb-3" rows="3" placeholder="O que você achou?" id="rev-texto"></textarea>
       <button class="btn btn-primary w-100" onclick="salvarReview()">Publicar review</button>
     </div>
+
+    <!-- PLAYLIST -->
+    <div id="conteudo-playlist" style="display:none">
+      <div class="modal-header">
+        <h5>Nova playlist 🎼</h5>
+        <button class="modal-close" onclick="fecharModal()">✕</button>
+      </div>
+      <input type="text" class="custom-input mb-3" placeholder="Nome da playlist" id="pl-nome"/>
+      <div class="emoji-selector mb-3">
+        <p class="form-label">Escolha um ícone</p>
+        <div class="emoji-grid">
+          <span class="emoji-opt active" onclick="selecionarEmoji(this)">🔥</span>
+          <span class="emoji-opt" onclick="selecionarEmoji(this)">🌙</span>
+          <span class="emoji-opt" onclick="selecionarEmoji(this)">☀️</span>
+          <span class="emoji-opt" onclick="selecionarEmoji(this)">💪</span>
+          <span class="emoji-opt" onclick="selecionarEmoji(this)">🎸</span>
+          <span class="emoji-opt" onclick="selecionarEmoji(this)">💜</span>
+          <span class="emoji-opt" onclick="selecionarEmoji(this)">🌊</span>
+          <span class="emoji-opt" onclick="selecionarEmoji(this)">⚡</span>
+        </div>
+      </div>
+      <button class="btn btn-primary w-100" onclick="salvarPlaylist()">Criar playlist</button>
+    </div>
+
   </div>
+</div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script src="js/main.js"></script>
