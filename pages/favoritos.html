@@ -21,48 +21,18 @@
     </div>
   </nav>
 
-  <main class="app-main">
+ <main class="app-main">
     <div class="section-header">
       <h2>❤️ Favoritos</h2>
-      <p>Suas músicas preferidas em um só lugar</p>
+      <p>As tuas músicas preferidas em um só lugar</p>
     </div>
 
-    <div class="review-card">
-      <div class="review-header">
-        <div class="music-cover" style="background:#DB023D;width:52px;height:52px;font-size:1.4rem;flex-shrink:0">🎸</div>
-        <div style="flex:1">
-          <p class="music-title" style="font-size:0.95rem">Bohemian Rhapsody</p>
-          <p class="music-artist">Queen</p>
-        </div>
-        <button class="btn-fav">❤️</button>
-      </div>
-    </div>
+    <div id="lista-favoritos"></div> 
+</main>
 
-    <div class="review-card">
-      <div class="review-header">
-        <div class="music-cover" style="background:#FF6347;width:52px;height:52px;font-size:1.4rem;flex-shrink:0">🎹</div>
-        <div style="flex:1">
-          <p class="music-title" style="font-size:0.95rem">Blinding Lights</p>
-          <p class="music-artist">The Weeknd</p>
-        </div>
-        <button class="btn-fav">❤️</button>
-      </div>
-    </div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../js/main.js"></script>
+<script src="../js/favoritos.js"></script>
 
-    <div class="review-card">
-      <div class="review-header">
-        <div class="music-cover" style="background:#c47a00;width:52px;height:52px;font-size:1.4rem;flex-shrink:0">👑</div>
-        <div style="flex:1">
-          <p class="music-title" style="font-size:0.95rem">Renaissance</p>
-          <p class="music-artist">Beyoncé</p>
-        </div>
-        <button class="btn-fav">❤️</button>
-      </div>
-    </div>
-
-  </main>
-
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/supabase.min.js"></script>
-  <script src="../js/main.js"></script>
 </body>
 </html>
