@@ -36,14 +36,35 @@
     <span>+</span>
 </button>
 
-<div class="modal-overlay" id="modal-overlay" style="display:none">
+
+   <div class="row justify-content-center mt-5">
+    <div class="col-12 col-lg-8 col-xl-6"> <h3 class="section-title text-center mb-4">Atividade da Comunidade</h3>
+        <div id="feed-reviews-global" class="reviews-feed">
+            </div>
+    </div>
+</div>
+
+  <!-- Botão Flutuante para Review -->
+  <button class="fab-button" onclick="prepararModalReview()" title="Nova Review">+</button>
+
+  <!-- MODAL DE REVIEW -->
+
+      <div class="modal-overlay" id="modal-overlay" style="display:none">
     <div class="modal-box">
         <div class="modal-header">
             <h5>Avaliar Música</h5>
             <button onclick="fecharModal()">✕</button>
         </div>
-        <input type="text" id="rev-musica" class="custom-input mb-2" placeholder="Nome da Música">
-        <input type="text" id="rev-artista" class="custom-input mb-3" placeholder="Artista">
+        
+        <div style="position:relative;">
+            <input type="text" id="rev-musica" class="custom-input mb-2" 
+                   placeholder="Digite o nome da música..." oninput="buscarSugestoesReview()">
+            <div id="sugestoes-review" class="sugestoes-box" 
+                 style="display:none; position:absolute; width:100%; z-index:9999; background:#2a2540; border:1px solid #e81856; border-radius:8px;">
+            </div>
+        </div>
+
+        <input type="text" id="rev-artista" class="custom-input mb-3" placeholder="Artista" readonly style="background: rgba(255,255,255,0.05); color: gray;">
         
         <div class="stars-rating mb-3">
             <span class="star" onclick="selecionarEstrelas(1)">★</span>
@@ -52,9 +73,8 @@
             <span class="star" onclick="selecionarEstrelas(4)">★</span>
             <span class="star" onclick="selecionarEstrelas(5)">★</span>
         </div>
-        
         <textarea id="rev-texto" class="custom-input mb-3" placeholder="O que achaste deste som?"></textarea>
-        <button class="btn btn-primary w-100" onclick="enviarReview()">Publicar Review</button>
+        <button class="btn-primary w-100" onclick="salvarReview()">Publicar Review</button>
     </div>
 </div>
 

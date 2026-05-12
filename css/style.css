@@ -1,11 +1,15 @@
 :root {
-  --bg: #1a1628;
-  --bg2: #0f0d1a;
-  --btn: #e81856;
-  --accent: #FF6347;
-  --card-bg: #2a2540;
-  --input-bg: #1f1a35;
+  --bg-body: #0f0c1d;
+  --bg-card: #1e1b2e;
+  --accent: #e81856;
+  --text-main: #ffffff;
   --text-muted: #a89ec9;
+  --btn: #e81856;
+
+  /* Legacy aliases for existing selectors */
+  --bg: var(--bg-body);
+  --bg2: rgba(15, 12, 29, 0.8);
+  --card-bg: var(--bg-card);
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -92,10 +96,11 @@ body {
 .btn-primary {
   background: var(--btn) !important;
   border: none !important;
-  border-radius: 10px !important;
-  padding: 12px !important;
-  font-weight: 600 !important;
-  transition: background 0.2s !important;
+  padding: 10px 20px !important;
+  border-radius: 50px !important;
+  color: #fff !important;
+  font-weight: bold !important;
+  text-decoration: none !important;
 }
 
 .btn-primary:hover { background: var(--accent) !important; }
@@ -134,8 +139,12 @@ body {
 /* ========================
    APP GERAL
 ======================== */
+body.app-body,
 .app-body {
-  background: var(--bg);
+  background-color: var(--bg-body);
+  color: var(--text-main);
+  font-family: 'Inter', sans-serif;
+  margin: 0;
   min-height: 100vh;
   display: block;
   padding-bottom: 80px;
@@ -143,48 +152,39 @@ body {
 
 /* NAVBAR */
 .navbar-custom {
-  background: var(--bg2);
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  padding: 16px 32px;
+  align-items: center;
+  padding: 20px 5%;
+  background: rgba(15, 12, 29, 0.8);
+  backdrop-filter: blur(10px);
   position: sticky;
   top: 0;
-  z-index: 100;
-  border-bottom: 1px solid #2a2540;
-  backdrop-filter: blur(10px);
+  z-index: 1000;
 }
 
 .nav-logo {
-  color: var(--btn);
-  font-weight: 700;
-  font-size: 1.4rem;
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #fff;
+  text-decoration: none;
 }
 
-.nav-links { 
-  display: flex; 
-  gap: 32px; 
-  align-items: center;
+.nav-links {
+  display: flex;
+  gap: 20px;
 }
 
 .nav-item {
+  color: var(--text-muted);
   text-decoration: none;
-  color: #fff;
-  font-weight: 500;
-  font-size: 0.95rem;
-  opacity: 0.7;
-  transition: opacity 0.2s, color 0.2s;
-  display: flex;
-  align-items: center;
-  gap: 6px;
+  font-size: 0.9rem;
+  transition: 0.3s;
 }
 
-.nav-item:hover, .nav-item.active {
-  opacity: 1;
-  color: var(--btn);
+.nav-item:hover,
+.nav-item.active {
+  color: var(--accent);
 }
 
 /* MAIN */
@@ -764,6 +764,118 @@ body {
 
 .btn-nav-solid:hover { background: var(--accent); }
 
+/* VITRINES - FILEIRA ÚNICA */
+#vitrine-publica,
+#vitrine-musicas {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  gap: 20px;
+  padding: 10px 5px 20px 5px;
+  scrollbar-width: none;
+  scroll-behavior: smooth;
+  padding: 5px;
+}
+
+#vitrine-publica::-webkit-scrollbar,
+#vitrine-musicas::-webkit-scrollbar {
+  display: none;
+}
+
+.music-card-container {
+  flex: 0 0 auto;
+  width: 180px;
+}
+
+.music-card {
+  background: var(--bg-card);
+  padding: 12px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.music-cover {
+  width: 100%;
+  aspect-ratio: 1/1;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.music-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.music-title-card {
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.music-artist-card {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.review-card {
+    background: var(--bg-card);
+    border-radius: 20px;
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: transform 0.2s;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.review-card:hover {
+    transform: translateY(-5px);
+}
+
+.review-header {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 12px;
+    margin-bottom: 12px;
+}
+
+.review-avatar {
+    width: 45px;
+    height: 45px;
+    background: linear-gradient(45deg, var(--accent), #ff4d7d);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    box-shadow: 0 0 10px rgba(232, 24, 86, 0.3);
+}
+
+.review-user {
+    font-weight: 700;
+    color: var(--accent);
+    font-size: 0.95rem;
+}
+
+.review-music {
+    font-size: 0.85rem;
+    color: var(--text-main);
+    opacity: 0.9;
+}
+
+.review-text {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+    font-style: italic;
+    margin: 0;
+}
+
 .card-stars {
   color: #FFD700;
   font-size: 0.75rem;
@@ -794,6 +906,15 @@ body {
   text-align: center;
   margin-top: 48px;
   border: 1px solid #4a3f80;
+}
+.sugestoes-box {
+    max-height: 200px;
+    overflow-y: auto;
+    background: #2a2540 !important; /* Cor do fundo do card */
+}
+
+.sugestao-item:hover {
+    background: rgba(232, 24, 86, 0.2); /* Cor de destaque ao passar o mouse */
 }
 
 .cta-title { color: var(--accent); font-weight: 700; font-size: 1.3rem; margin-bottom: 8px; }
