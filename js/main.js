@@ -402,6 +402,10 @@ document.addEventListener('DOMContentLoaded', () => {
     carregarFeedGlobal();        // Para index.html
 });
 
+function exigirLogin() {
+    alert('Faça login para acessar esta funcionalidade.');
+}
+
 
 
 window.scrollVitrine = scrollVitrine;
