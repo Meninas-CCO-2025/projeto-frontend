@@ -30,19 +30,36 @@
     <h3 class="section-title">Populares no Vinyl</h3>
 <div id="vitrine-musicas" class="row"></div>
 
-  </main>
 
- <button class="fab-button" onclick="prepararModalReview()" title="Nova Review">
+<div class="row justify-content-center mt-5">
+    <div class="col-12 col-lg-10">
+        <h3 class="section-title mb-4">Artistas para Explorar</h3>
+<div id="lista-artistas" class="d-flex flex-wrap justify-content-center gap-4">
+    </div>
+
+    </div>
+</div>
+
+  </main>
+<div class="fab-container">
+  <div class="fab-options" id="fab-options">
+    <button class="fab-item" onclick="prepararModalPlaylist()" title="Nova Playlist">
+      <span class="fab-label">Nova Playlist</span>
+      <span class="fab-icon">🎵</span>
+    </button>
+    <button class="fab-item" onclick="prepararModalReview()" title="Nova Review">
+      <span class="fab-label">Nova Review</span>
+      <span class="fab-icon">⭐</span>
+    </button>
+  </div>
+  <button class="fab-main" onclick="toggleFab()" id="fab-main">
     <span>+</span>
+  </button>
+</div>
 </button>
 
 
-   <div class="row justify-content-center mt-5">
-    <div class="col-12 col-lg-8 col-xl-6"> <h3 class="section-title text-center mb-4">Atividade da Comunidade</h3>
-        <div id="feed-reviews-global" class="reviews-feed">
-            </div>
-    </div>
-</div>
+   
 
   <!-- Botão Flutuante para Review -->
   <button class="fab-button" onclick="prepararModalReview()" title="Nova Review">+</button>
@@ -78,6 +95,25 @@
     </div>
 </div>
 
+<div class="modal-overlay" id="modal-playlist" style="display:none">
+    <div class="modal-box">
+        <div class="modal-header">
+            <h5>Criar Nova Playlist</h5>
+            <button onclick="fecharModalPlaylist()">✕</button>
+        </div>
+        <input type="text" id="play-nome" class="custom-input mb-3" placeholder="Nome da minha playlist">
+        
+        <div style="position:relative;">
+            <input type="text" id="busca-musica-playlist" class="custom-input mb-2" 
+                   placeholder="Pesquisar música..." oninput="buscarMusicasParaPlaylist()">
+            <div id="sugestoes-playlist" class="sugestoes-box" style="display:none; background:#2a2540; border:1px solid #e81856;"></div>
+        </div>
+
+        <div id="lista-musicas-selecionadas" class="mb-3 mt-2" style="min-height:50px; border:1px dashed #444; padding:10px;">
+            </div>
+        <button class="btn-primary w-100" onclick="salvarPlaylist()">Publicar Playlist</button>
+    </div>
+</div>
 
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>

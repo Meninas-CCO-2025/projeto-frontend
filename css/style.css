@@ -17,19 +17,57 @@
 body {
   background: var(--bg);
   min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   font-family: 'Segoe UI', sans-serif;
   color: #f0f0f0;
+  display: flex; 
+  margin: 0;
+   align-items: center;    /* Centraliza verticalmente */
+  justify-content: center; 
 }
 
-/* AUTH */
+
 .auth-wrapper {
   width: 100%;
   max-width: 420px;
   padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
+
+
+.tab-switcher {
+  display: flex;
+  width: 100%;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 20px;
+}
+
+.tab-btn {
+  flex: 1; /* Faz com que cada botão ocupe exatamente 50% da largura */
+  background: none;
+  border: none;
+  padding: 12px;
+  color: var(--text-muted);
+  font-weight: 600;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: 0.3s;
+  text-align: center;
+}
+
+.tab-btn.active {
+  color: var(--accent) !important;
+  border-bottom: 2px solid var(--accent);
+}
+
+.auth-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
 
 .logo {
   font-size: 2rem;
@@ -49,29 +87,14 @@ body {
   box-shadow: 0 8px 32px rgba(0,0,0,0.4);
 }
 
-/* Abas */
-.tab-switcher {
-  display: flex;
-  background: var(--input-bg);
-  border-radius: 10px;
-  padding: 4px;
+
+.auth-tab.active {
+    color: var(--accent) !important; /* Rosa do seu projeto */
+    border-bottom: 3px solid var(--accent); /* Linha rosa embaixo */
 }
 
-.tab-btn {
-  flex: 1;
-  border: none;
-  background: transparent;
-  color: var(--text-muted);
-  padding: 10px;
-  border-radius: 8px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.tab-btn.active {
-  background: var(--btn);
-  color: #fff;
+.auth-tab:hover {
+    color: white;
 }
 
 /* Inputs */
@@ -360,6 +383,74 @@ body.app-body,
     transform: scale(1.1);
     background-color: #ff2e6d;
 }
+/* Container posicionado no canto */
+.fab-container {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+/* Botão Principal */
+.fab-main {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #e81856; /* Cor padrão do seu projeto */
+    color: white;
+    border: none;
+    font-size: 30px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.fab-main.active {
+    transform: rotate(45deg); /* Gira o + para virar um X */
+    background: #555;
+}
+
+/* Opções que ficam escondidas */
+.fab-options {
+    display: none; /* Escondido por padrão */
+    flex-direction: column;
+    align-items: flex-end;
+    margin-bottom: 15px;
+    gap: 10px;
+}
+
+.fab-item {
+    display: flex;
+    align-items: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.fab-label {
+    background: #2a2540;
+    color: white;
+    padding: 5px 12px;
+    border-radius: 8px;
+    margin-right: 10px;
+    font-size: 14px;
+    border: 1px solid #e81856;
+}
+
+.fab-icon {
+    width: 45px;
+    height: 45px;
+    background: #e81856;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
 
 .music-card:hover {
     transform: translateY(-5px);
@@ -445,14 +536,19 @@ body.app-body,
 
 /* REVIEW CARDS */
 .review-card {
-  background: var(--card-bg);
-  border-radius: 14px;
-  padding: 16px;
-  margin-bottom: 12px;
-  border-left: 3px solid var(--btn);
+    background: rgba(255, 255, 255, 0.05);
+    padding: 15px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.review-header { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+.review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
 
 .review-avatar {
   width: 42px; height: 42px;
@@ -614,12 +710,12 @@ body.app-body,
 .perfil-email { font-size: 0.85rem; color: var(--text-muted); margin: 0; }
 .perfil-data  { font-size: 0.8rem; color: var(--text-muted); margin: 0; }
 
-.stats-row {
+.perfil-stats {
   display: flex;
   gap: 12px;
 }
 
-.stat-box {
+.stat-item {
   flex: 1;
   background: var(--card-bg);
   border-radius: 12px;
@@ -630,8 +726,6 @@ body.app-body,
   gap: 4px;
 }
 
-.stat-num   { font-size: 1.6rem; font-weight: 700; color: var(--accent); }
-.stat-label { font-size: 0.75rem; color: var(--text-muted); }
 
 .config-card {
   background: var(--card-bg);
@@ -921,7 +1015,7 @@ body.app-body,
 .cta-sub   { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 24px; }
 
 /* ABAS DO PERFIL */
-.perfil-tabs {
+.perfil-abas {
   display: flex;
   background: var(--input-bg);
   border-radius: 10px;
@@ -929,7 +1023,7 @@ body.app-body,
   gap: 4px;
 }
 
-.perfil-tab {
+.aba {
   flex: 1;
   border: none;
   background: transparent;
@@ -942,7 +1036,7 @@ body.app-body,
   transition: all 0.2s;
 }
 
-.perfil-tab.active {
+.aba.active {
   background: var(--btn);
   color: #fff;
 }
@@ -1042,4 +1136,149 @@ body.app-body,
   border-bottom: none;
   margin-bottom: 0;
   padding-bottom: 0;
+}
+
+/* Bolinhas com cores e estilo Spotify */
+.artist-circle {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 3px solid rgba(255, 255, 255, 0.1);
+    background: linear-gradient(135deg, #3a3251, #1e1b2e); /* Cor padrão */
+    margin-bottom: 10px;
+}
+
+.artist-circle:hover {
+    transform: scale(1.08);
+    border-color: var(--accent);
+}
+
+
+.musicas-dropdown-v2 {
+    background: #1e1b2e; /* Mesma cor dos cards para unidade visual */
+    border-radius: 12px;
+    padding: 8px;
+    margin-top: 15px;
+    border: 1px solid rgba(232, 24, 86, 0.3);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    width: 100%;
+    max-width: 320px;
+}
+
+
+
+.track-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.track-img {
+    width: 45px;
+    height: 45px;
+    border-radius: 6px;
+    object-fit: cover;
+    margin-right: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+.track-info {
+    flex: 1;
+    text-align: left;
+}
+
+.track-name {
+    color: #fff;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Botão de Avaliar pequeno e elegante */
+.btn-track-review {
+    background: transparent;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    font-size: 0.7rem;
+    padding: 4px 8px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.btn-track-review:hover {
+    background: var(--accent);
+    color: white;
+}
+
+/* Container das playlists */
+.playlist-card-v2 {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 15px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.2s;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    height: 100%;
+}
+
+.playlist-card-v2:hover {
+    transform: translateY(-5px);
+    background: rgba(232, 24, 86, 0.1);
+    border-color: var(--accent);
+}
+
+.playlist-capa-dinamica {
+    width: 100%;
+    aspect-ratio: 1/1;
+    border-radius: 8px;
+    object-fit: cover;
+    margin-bottom: 10px;
+    background: #2a2540; /* Cor de fundo caso não tenha foto */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+}
+
+/* Lista de músicas ao abrir */
+.musica-item-playlist {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background: rgba(255,255,255,0.03);
+    margin-bottom: 8px;
+    border-radius: 8px;
+}
+
+.musica-item-playlist img {
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+    margin-right: 15px;
+}
+.aba-item {
+    cursor: pointer;
+    color: var(--text-muted);
+    font-weight: 600;
+    padding-bottom: 5px;
+    transition: 0.3s;
+    border-bottom: 2px solid transparent;
+}
+
+.aba-item.active {
+    color: var(--accent);
+    border-bottom: 2px solid var(--accent);
+}
+
+.aba-item:hover {
+    color: white;
 }
