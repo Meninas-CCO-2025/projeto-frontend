@@ -3,8 +3,9 @@
 2. Teste de navegação 
 3. Teste de formulário/login
 4. Teste de elementos visíveis
-5. Teste dos cards de música
-6. Verificação de texto
+5. Verificação de texto
+6. Teste dos cards de música
+
 */
 
 describe('Fluxo do site', () => {
@@ -62,6 +63,25 @@ describe('Fluxo do site', () => {
 
     cy.get('#login-senha')
       .type('123456')
+
+  })
+
+    // 4. TESTE DE ELEMENTOS VISÍVEIS
+
+  it('Verifica se o menu existe', () => {
+
+    cy.visit('http://127.0.0.1:8080')
+
+    cy.get('nav').should('exist')
+
+  })
+
+   // 5. VERIFICAÇÃO DE TEXTO
+  it('Verifica se o texto principal aparece', () => {
+
+    cy.visit('http://127.0.0.1:8080/login.html')
+
+    cy.contains('Descubra e avalie sua música')
 
   })
 
