@@ -85,4 +85,15 @@ describe('Fluxo do site', () => {
 
   })
 
+   // 6. TESTE DOS CARDS DE MÚSICA
+  it('Clica em um card de música', () => {
+
+    cy.visit('http://127.0.0.1:8080')
+
+    cy.get('.music-card')
+      .first()
+      .click()
+
+  })
+
 })
