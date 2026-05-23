@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MusicBox — Perfil</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="../css/style.css"/>
+</head>
+<body class="app-body">
+
+  <nav class="navbar-custom">
+    <a href="../app.html" class="nav-logo">◉ Vinyl</a>
+    <div class="nav-links">
+      <a href="explorar.html"  class="nav-item">🔥 Explorar</a>
+      <a href="busca.html"     class="nav-item">🔍 Buscar</a>
+      <a href="favoritos.html" class="nav-item">❤️ Favoritos</a>
+      <a href="perfil.html"    class="nav-item active" style="color:var(--btn)">👤 Perfil</a>
+      <a href="javascript:logout()" class="nav-item">🚪 Sair</a>
+    </div>
+  </nav>
+
+  <main class="app-main">
+
+    <div class="perfil-header">
+      <div class="perfil-avatar">🎧</div>
+      <div style="flex:1">
+        <h2 class="perfil-nome" id="perfil-nome">@usuario</h2>
+        <p class="perfil-email" id="perfil-email">email@exemplo.com</p>
+      </div>
+      <button class="btn btn-secondary" onclick="abrirModalConfig()">⚙️</button>
+    </div>
+
+    <div class="perfil-stats">
+      <div class="stat-item">
+        <strong id="stat-reviews">0</strong>
+        <span>Reviews</span>
+      </div>
+      <div class="stat-item">
+        <strong id="stat-playlists">0</strong>
+        <span>Playlists</span>
+      </div>
+      <div class="stat-item">
+        <strong id="stat-favoritos">0</strong>
+        <span>Favoritos</span>
+      </div>
+    </div>
+
+    <div class="perfil-abas mb-4">
+      <div class="aba active" id="btn-aba-reviews" onclick="mostrarSecao('reviews')">Reviews</div>
+      <div class="aba" id="btn-aba-playlists" onclick="mostrarSecao('playlists')">Playlists</div>
+      <div class="aba" id="btn-aba-favoritos" onclick="mostrarSecao('favoritos')">❤️ Favoritos</div>
+    </div>
+
+    <div id="perfil-reviews-container" class="row">
+      <p class="text-center w-100 text-muted">Carregando reviews...</p>
+    </div>
+
+    <div id="perfil-grade-playlists" class="row d-none">
+      <p class="text-center w-100 text-muted">Carregando playlists...</p>
+    </div>
+
+    <div id="perfil-favoritos-container" class="row d-none">
+      <p class="text-center w-100 text-muted">Carregando favoritos...</p>
+    </div>
+
+  </main>
+
+  <div class="modal-overlay" id="modal-config" style="display:none">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h5>⚙️ Configurações</h5>
+        <button class="modal-close" onclick="fecharModalConfig()">✕</button>
+      </div>
+
+      <div class="config-grupo mb-3">
+        <label class="form-label">👤 Alterar nome de usuário</label>
+        <input type="text" class="custom-input mb-2" id="novo-nome" placeholder="Novo nome de usuário"/>
+        <button class="btn btn-primary w-100" onclick="salvarNome()">Salvar nome</button>
+        <p id="msg-nome" class="erro-msg mt-1"></p>
+      </div>
+
+      <div class="config-grupo mb-3">
+        <label class="form-label">✉️ Alterar e-mail</label>
+        <br>
+        <input type="email" class="custom-input mb-2" id="novo-email" placeholder="Novo e-mail"/>
+        <button class="btn btn-primary w-100" onclick="salvarEmail()">Salvar e-mail</button>
+        <p id="msg-email" class="erro-msg mt-1"></p>
+      </div>
+
+      <div class="config-grupo p-3" style="border:1px solid rgba(219,2,61,0.3); border-radius:12px;">
+        <p class="form-label" style="color:var(--btn)">⚠️ Zona de perigo</p>
+        <p style="color:var(--text-muted); font-size:0.82rem; margin-bottom:12px">
+          Todos os seus dados serão apagados permanentemente.
+        </p>
+        <button class="btn btn-danger-custom w-100" onclick="confirmarDelecao()">
+          🗑️ Deletar minha conta
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="modal-deletar" style="display:none">
+    <div class="modal-box" style="text-align:center">
+      <p style="font-size:2.5rem; margin-bottom:8px">⚠️</p>
+      <h5 style="color:var(--btn); margin-bottom:8px">Deletar conta</h5>
+      <p style="color:#ccc; font-size:0.9rem; margin-bottom:24px">
+        Tem certeza? Todos os seus dados serão apagados.
+      </p>
+      <button class="btn btn-danger-custom w-100 mb-2" onclick="deletarConta()">
+        Sim, deletar minha conta
+      </button>
+      <button class="btn btn-secondary w-100" onclick="fecharModalDeletar()">Cancelar</button>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/perfil.js"></script>
+</body>
+</html>
