@@ -1,0 +1,38 @@
+name: CI - Integração Contínua
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main] 
+  
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4 # Ação para fazer checkout do código-fonte do repositório
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4 # Ação para configurar o ambiente Node.js
+        with:
+          node-version: 20
+          cache: 'npm' #guarda as dependências em cache pra não baixar tudo do zero em cada execução
+
+      - name: Instalar dependências
+        run: npm ci
+
+      - name: Rodar testes Cypress
+        uses: cypress-io/github-actions@v6
+        with: 
+          browser: chrome
+
+      - name: Salvar artefatos do Cypress em caso de falha
+        uses: actions/upload-artifact@v4
+        if: failure() # Só salva os artefatos se os testes falharem
+        with:
+          name: cypress-artefatos
+          path: |
+          cypress/screenshots
+          cypress/videos
+          retention-days: 7 # Define por quanto tempo os artefatos ficarão disponíveis para download
