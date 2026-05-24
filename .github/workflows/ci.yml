@@ -33,6 +33,6 @@ jobs:
         with:
           name: cypress-artefatos
           path: |
-          cypress/screenshots
-          cypress/videos
+            cypress/screenshots
+            cypress/videos
           retention-days: 7 # Define por quanto tempo os artefatos ficarão disponíveis para download
