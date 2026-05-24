@@ -1,0 +1,19 @@
+name: CD - Entrega Contínua
+
+on:
+  workflow_run:
+    workflows: ["CI - Integração Contínua"]
+    types: [completed]
+    branches: [main]
+
+jobs:
+  deploy:
+    name: Deploy para Produção
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Deploy pendente
+        run: echo "Deploy será configurado em breve"
