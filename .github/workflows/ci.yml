@@ -7,7 +7,7 @@ on:
   
 jobs:
   build-and-test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest # Define o ambiente de execução como a última versão do Ubuntu
     
     steps:
       - name: Checkout do código
