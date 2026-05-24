@@ -23,7 +23,7 @@ jobs:
         run: npm ci
 
       - name: Rodar testes Cypress
-        uses: cypress-io/github-actions@v6
+        uses: cypress-io/github-action@v6
         with: 
           browser: chrome
 
