@@ -17,7 +17,7 @@ jobs:
       - name: Configurar Node.js
         uses: actions/setup-node@v4 # Ação para configurar o ambiente Node.js
         with:
-          node-version: 20
+          node-version: 24
           cache: 'npm' #guarda as dependências em cache pra não baixar tudo do zero em cada execução
 
       - name: Instalar dependências
@@ -27,6 +27,8 @@ jobs:
         uses: cypress-io/github-action@v6
         with: 
           browser: chrome
+          start: npm start
+          wait-on: 'http://localhost:5173' # Espera o servidor de desenvolvimento estar disponível antes de rodar os testes
 
       - name: Salvar artefatos do Cypress em caso de falha
         uses: actions/upload-artifact@v4
