@@ -1,9 +1,10 @@
 name: CI - Integração Contínua
 on:
   push:
-    branches: [main]
+    branches: [main, feature/ci-pipeline] # Define os branches que acionam o workflow quando há um push
   pull_request:
-    branches: [main] 
+    branches: [main]
+  workflow_dispatch: # Permite disparar o workflow manualmente (cria um botão "Run workflow" na interface do GitHub)
   
 jobs:
   build-and-test:
