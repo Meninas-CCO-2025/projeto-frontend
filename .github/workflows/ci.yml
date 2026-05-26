@@ -29,6 +29,7 @@ jobs:
           browser: chrome
           start: npm start
           wait-on: 'http://localhost:5173' # Espera o servidor de desenvolvimento estar disponível antes de rodar os testes
+          wait-on-timeout: 120 # Tempo máximo de espera para o servidor iniciar (em segundos)
 
       - name: Salvar artefatos do Cypress em caso de falha
         uses: actions/upload-artifact@v4
