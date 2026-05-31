@@ -86,8 +86,8 @@ vinyl/
 
 ## 📌 Integrantes
 
-Bárbara Falcão - 2506486 
-Giovana de Godoy Felisbino - 2507579
-Giovanna Falgetano - 2512938
-Glória Mariano - 2504112
-Lais da Rosa Câmara - 2505420
+* Bárbara Falcão - 2506486 
+* Giovana de Godoy Felisbino - 2507579
+* Giovanna Falgetano - 2512938
+* Glória Mariano - 2504112
+* Lais da Rosa Câmara - 2505420
