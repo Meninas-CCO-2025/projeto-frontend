@@ -1,3 +1,9 @@
+// --- SISTEMA DE CONFIGURAÇÕES DO PERFIL ---
+
+// Abre e fecha o modal principal de configurações
+window.abrirModalConfig = () => document.getElementById('modal-config').style.display = 'flex';
+window.fecharModalConfig = () => document.getElementById('modal-config').style.display = 'none';
+
 window.addEventListener('DOMContentLoaded', async () => {
     const usuario = JSON.parse(localStorage.getItem('usuario') || '{}');
     if (usuario.nome) {
@@ -14,90 +20,154 @@ window.addEventListener('DOMContentLoaded', async () => {
     }
 });
 
-// --- FUNÇÕES DE CONFIGURAÇÃO (MODAL) ---
+// ============================================================
+// FUNÇÃO PARA ALTERAR E SALVAR O NOME DE USUÁRIO
+// ============================================================
 
-window.abrirModalConfig = () => document.getElementById('modal-config').style.display = 'flex';
-window.fecharModalConfig = () => document.getElementById('modal-config').style.display = 'none';
-
-async function salvarNome() {
+// Atualiza o nome do usuário diretamente nos metadados de autenticação do Supabase, garantindo que a mudança seja refletida em toda a plataforma.
+window.salvarNome = async function() {
     const db = window.conexaoSupabase;
     const novoNome = document.getElementById('novo-nome').value.trim();
-    const usuario = JSON.parse(localStorage.getItem('usuario'));
+    let usuario = JSON.parse(localStorage.getItem('usuario') || '{}');
     const msg = document.getElementById('msg-nome');
 
-    if (!novoNome || novoNome === usuario.nome) return;
+    if (!novoNome) {
+        if (msg) {
+            msg.style.color = "#e81856";
+            msg.innerText = "O nome não pode ficar vazio.";
+        }
+        return;
+    }
 
     try {
-        // Atualiza na tabela de perfis/usuarios (ajuste o nome da tabela conforme seu banco)
-        const { error } = await db.from('usuarios').update({ nome: novoNome }).eq('id', usuario.id);
-        
-        if (error) throw error;
+        // 1. Atualiza o full_name nos metadados de autenticação do Supabase (Auth)
+        const { error: authError } = await db.auth.updateUser({
+            data: { full_name: novoNome }
+        });
+        if (authError) throw authError;
 
-        // Atualiza localmente
+        // 2. Atualiza o objeto local
         usuario.nome = novoNome;
         localStorage.setItem('usuario', JSON.stringify(usuario));
-        document.getElementById('perfil-nome').textContent = '@' + novoNome;
-        
-        msg.textContent = "Nome atualizado com sucesso!";
-        msg.style.color = "#00ff00";
-    } catch (err) {
-        msg.textContent = "Erro ao atualizar nome.";
-        console.error(err);
-    }
-}
 
-async function salvarEmail() {
+        // 3. Atualiza os elementos visuais imediatamente na página
+        if (document.getElementById('perfil-nome')) {
+            document.getElementById('perfil-nome').textContent = '@' + novoNome;
+        }
+
+        if (msg) {
+            msg.style.color = "#27ae60"; 
+            msg.innerText = "Nome atualizado com sucesso!";
+        }
+        
+        // Recarrega os dados pessoais da página para atualizar a lista de reviews abaixo com o novo nome
+        if (typeof carregarDadosPessoais === 'function') {
+            carregarDadosPessoais(novoNome);
+        }
+
+        setTimeout(fecharModalConfig, 1200);
+
+    } catch (err) {
+        console.error("Erro ao salvar nome:", err);
+        if (msg) {
+            msg.style.color = "#e81856";
+            msg.innerText = "Erro: " + err.message;
+        }
+    }
+};
+
+
+// ============================================================
+// FUNÇÃO PARA ALTERAR E SALVAR O E-MAIL (DIRETO NO SUPABASE)
+// ============================================================
+
+// Esta função chama uma função SQL (RPC) personalizada no Supabase que atualiza o e-mail do usuário diretamente no banco de dadoos
+window.salvarEmail = async function() {
     const db = window.conexaoSupabase;
     const novoEmail = document.getElementById('novo-email').value.trim();
-    const usuario = JSON.parse(localStorage.getItem('usuario'));
+    let usuario = JSON.parse(localStorage.getItem('usuario') || '{}');
     const msg = document.getElementById('msg-email');
 
-    if (!novoEmail || novoEmail === usuario.email) return;
+    if (!novoEmail) {
+        if (msg) {
+            msg.style.color = "#e81856";
+            msg.innerText = "O e-mail não pode ficar vazio.";
+        }
+        return;
+    }
 
     try {
-        const { error } = await db.from('usuarios').update({ email: novoEmail }).eq('id', usuario.id);
+        // 1. Chama a função SQL (RPC) para forçar a mudança do e-mail sem enviar links
+        const { error: rpcError } = await db.rpc('atualizar_email_direto', {
+            novo_email: novoEmail
+        });
         
-        if (error) throw error;
+        if (rpcError) throw rpcError;
 
+        // 2. Atualiza o localStorage para manter a sessão sincronizada localmente
         usuario.email = novoEmail;
         localStorage.setItem('usuario', JSON.stringify(usuario));
-        document.getElementById('perfil-email').textContent = novoEmail;
-        
-        msg.textContent = "E-mail atualizado!";
-        msg.style.color = "#00ff00";
+
+        // 3. Atualiza a interface do utilizador imediatamente
+        if (document.getElementById('perfil-email')) {
+            document.getElementById('perfil-email').textContent = novoEmail;
+        }
+
+        if (msg) {
+            msg.style.color = "#27ae60";
+            msg.innerText = "E-mail alterado com sucesso no banco de dados!";
+        }
+
+        // Fecha o modal após o sucesso
+        setTimeout(fecharModalConfig, 1500);
+
     } catch (err) {
-        msg.textContent = "Erro ao atualizar e-mail.";
-        console.error(err);
+        console.error("Erro ao salvar e-mail:", err);
+        if (msg) {
+            msg.style.color = "#e81856";
+            msg.innerText = "Erro ao atualizar: " + err.message;
+        }
     }
-}
+};
 
-window.confirmarDelecao = () => document.getElementById('modal-deletar').style.display = 'flex';
-window.fecharModalDeletar = () => document.getElementById('modal-deletar').style.display = 'none';
+// --- CONTROLE DO MODAL DE DELETAR CONTA ---
 
-async function deletarConta() {
+// Estas funções controlam a abertura, fechamento e ação de deletar conta do modal de confirmação
+window.confirmarDelecao = function() {
+    const modalDeletar = document.getElementById('modal-deletar');
+    if (modalDeletar) modalDeletar.style.display = 'flex';
+};
+
+// Esta função fecha o modal de deleção sem realizar nenhuma ação, permitindo que o usuário cancele a operação
+window.fecharModalDeletar = function() {
+    const modalDeletar = document.getElementById('modal-deletar');
+    if (modalDeletar) modalDeletar.style.display = 'none';
+};
+
+// Deleta definitivamente a conta do usuário, removendo suas reviews e depois deletando o próprio usuário do Supabase, garantindo que todos os dados relacionados sejam limpos
+window.deletarContaDefinitiva = async function() {
     const db = window.conexaoSupabase;
-    const usuario = JSON.parse(localStorage.getItem('usuario'));
+    const usuario = JSON.parse(localStorage.getItem('usuario') || '{}');
 
     try {
-        // 1. Apagar dados relacionados (Playlists, Reviews)
-        await db.from('playlists').delete().eq('usuario_id', usuario.nome);
-        await db.from('reviews').delete().eq('usuario', usuario.nome);
-        
-        // 2. Apagar o usuário
-        const { error } = await db.from('usuarios').delete().eq('id', usuario.id);
-        
+        if (usuario.nome) {
+            await db.from('reviews').delete().eq('usuario', usuario.nome);
+        }
+
+        const { error } = await db.rpc('deletar_proprio_usuario');
         if (error) throw error;
 
         localStorage.clear();
         window.location.href = '../index.html';
     } catch (err) {
-        alert("Erro ao deletar conta.");
-        console.error(err);
+        console.error("Erro ao deletar conta:", err);
+        alert("Não foi possível deletar a conta: " + err.message);
     }
-}
+};
 
 // --- LOGICA DE DADOS (REVIEWS, PLAYLISTS, FAVORITOS) ---
 
+// Carrega as reviews, playlists e favoritos do usuário logado
 async function carregarDadosPessoais(nomeLogado) {
     const db = window.conexaoSupabase;
     if (!db) return;
@@ -123,6 +193,7 @@ async function carregarDadosPessoais(nomeLogado) {
     } catch (err) { console.error(err); }
 }
 
+// Carrega as playlists do usuário logado, mostrando a capa da primeira música, nome da playlist e quantidade de músicas
 async function carregarGradePlaylists(nomeLogado) {
     const db = window.conexaoSupabase;
     const containerPlay = document.getElementById('perfil-grade-playlists');
@@ -130,6 +201,7 @@ async function carregarGradePlaylists(nomeLogado) {
 
     const { data: playlists } = await db.from('playlists').select('*').eq('usuario_id', nomeLogado);
 
+    // Para cada playlist, busca a capa da primeira música (ou usa uma imagem padrão se estiver vazia) e renderiza a playlist com um botão de exclusão e uma seta para expandir a lista de músicas
     if (playlists && playlists.length > 0) {
         containerPlay.innerHTML = ''; 
         for (const p of playlists) {
@@ -141,6 +213,7 @@ async function carregarGradePlaylists(nomeLogado) {
                 if (musicas && musicas.length > 0) capa = musicas[0].capa_url;
             }
 
+            // Renderiza cada playlist com a capa, nome e quantidade de músicas, além de um botão para excluir a playlist e uma seta para expandir a lista de músicas
             const divGeral = document.createElement('div');
             divGeral.className = 'col-12 mb-3';
             divGeral.id = `playlist-item-${p.id}`;
@@ -167,6 +240,7 @@ async function carregarGradePlaylists(nomeLogado) {
 }
 
 // Funções Auxiliares de Exclusão
+
 async function excluirReview(id) {
     if (!confirm("Apagar esta review?")) return;
     await window.conexaoSupabase.from('reviews').delete().eq('id', id);
@@ -175,6 +249,7 @@ async function excluirReview(id) {
     stat.textContent = parseInt(stat.textContent) - 1;
 }
 
+// Exclui a playlist do banco de dados e remove o item da interface, atualizando o contador de playlists
 async function excluirPlaylist(id) {
     if (!confirm("Apagar esta playlist?")) return;
     await window.conexaoSupabase.from('playlists').delete().eq('id', id);
@@ -183,12 +258,14 @@ async function excluirPlaylist(id) {
     stat.textContent = parseInt(stat.textContent) - 1;
 }
 
+// Atualiza o contador de favoritos no perfil, lendo os IDs dos favoritos do localStorage e atualizando o número exibido na interface
 function atualizarContadorFavoritos() {
     const idsFav = JSON.parse(localStorage.getItem('meus_favoritos') || '[]');
     const elStat = document.getElementById('stat-favoritos');
     if (elStat) elStat.textContent = idsFav.length;
 }
 
+// Alterna a exibição da lista de músicas de uma playlist, buscando os detalhes das músicas do banco de dados quando a playlist é aberta e renderizando as informações na interface
 window.togglePlaylist = async function(id) {
     const lista = document.getElementById(`lista-${id}`);
     const seta = document.getElementById(`seta-${id}`);
@@ -203,6 +280,7 @@ window.togglePlaylist = async function(id) {
         const ids = p.musicas.map(m => m.id);
         const { data: musicas } = await db.from('musicas').select('*').in('id', ids);
         
+        // Renderiza a lista de músicas da playlist, mostrando capa, título e artista de cada música
         lista.innerHTML = musicas.map(m => `
             <div class="d-flex align-items-center mb-2 p-2" style="border-bottom:1px solid rgba(255,255,255,0.05)">
                 <img src="${m.capa_url}" style="width:35px; height:35px; border-radius:4px; margin-right:12px;">
@@ -214,6 +292,7 @@ window.togglePlaylist = async function(id) {
     }
 };
 
+// Controla a exibição das seções de reviews, playlists e favoritos no perfil, mostrando apenas a seção selecionada e atualizando o estilo das abas para indicar qual está ativa. Quando a aba de favoritos é selecionada, também carrega os favoritos do perfil para garantir que a lista esteja atualizada.
 window.mostrarSecao = function(tipo) {
     const secoes = ['perfil-reviews-container', 'perfil-grade-playlists', 'perfil-favoritos-container'];
     const abas = ['btn-aba-reviews', 'btn-aba-playlists', 'btn-aba-favoritos'];
@@ -221,12 +300,14 @@ window.mostrarSecao = function(tipo) {
     secoes.forEach(id => document.getElementById(id).classList.add('d-none'));
     abas.forEach(id => document.getElementById(id).classList.remove('active'));
 
+    // Mostra a seção selecionada e marca a aba correspondente como ativa
     document.getElementById(`perfil-${tipo === 'favoritos' ? 'favoritos-container' : tipo === 'reviews' ? 'reviews-container' : 'grade-playlists'}`).classList.remove('d-none');
     document.getElementById(`btn-aba-${tipo}`).classList.add('active');
     
     if (tipo === 'favoritos') carregarFavoritosPerfil();
 };
 
+// Carrega as músicas favoritas do usuário, buscando os detalhes das músicas a partir dos IDs armazenados no localStorage e renderizando a lista de favoritos na interface, permitindo também remover músicas da lista de favoritos
 async function carregarFavoritosPerfil() {
     const db = window.conexaoSupabase;
     const container = document.getElementById('perfil-favoritos-container');
@@ -237,6 +318,7 @@ async function carregarFavoritosPerfil() {
         return;
     }
 
+    // Busca os detalhes das músicas favoritas a partir dos IDs e renderiza a lista de favoritos, mostrando capa, título e artista de cada música, além de um botão para remover a música dos favoritos
     const { data: musicas } = await db.from('musicas').select('*').in('id', ids);
     container.innerHTML = musicas.map(m => `
         <div class="col-12 mb-2" id="fav-${m.id}">
@@ -248,6 +330,7 @@ async function carregarFavoritosPerfil() {
         </div>`).join('');
 }
 
+// Remove uma música dos favoritos, atualizando o localStorage, removendo o item da interface e atualizando o contador de favoritos no perfil
 window.removerFavorito = (id) => {
     let ids = JSON.parse(localStorage.getItem('meus_favoritos') || '[]');
     ids = ids.filter(i => i !== id);
