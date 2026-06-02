@@ -1,4 +1,9 @@
+
+/* =====================================================
+   1. VARIÁVEIS E RESET
+   ===================================================== */
 :root {
+  /* Cores Principais */
   --bg-body: #0f0c1d;
   --bg-card: #1e1b2e;
   --accent: #e81856;
@@ -6,25 +11,35 @@
   --text-muted: #a89ec9;
   --btn: #e81856;
 
-  /* Legacy aliases for existing selectors */
+  /* Cores de Apoio */
+  --input-bg: #2a2540;
+  --border-color: #4a3f80;
+  --card-shadow: rgba(0, 0, 0, 0.4);
+
+  /* Aliases para compatibilidade */
   --bg: var(--bg-body);
   --bg2: rgba(15, 12, 29, 0.8);
   --card-bg: var(--bg-card);
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
-
-body {
-  background: var(--bg);
-  min-height: 100vh;
-  font-family: 'Segoe UI', sans-serif;
-  color: #f0f0f0;
-  display: flex; 
+/* Reset básico */
+* {
+  box-sizing: border-box;
   margin: 0;
-   align-items: center;    /* Centraliza verticalmente */
-  justify-content: center; 
+  padding: 0;
 }
 
+/* =====================================================
+  2. AUTENTICAÇÃO (LOGIN/CADASTRO)
+   ===================================================== */
+
+/* Container principal de autenticação */
+.auth-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
 
 .auth-wrapper {
   width: 100%;
@@ -35,7 +50,22 @@ body {
   justify-content: center;
 }
 
+/* Card de autenticação */
+.auth-card {
+  background: var(--card-bg);
+  border-radius: 16px;
+  padding: 32px 28px;
+  box-shadow: 0 8px 32px var(--card-shadow);
+}
 
+/* Logo */
+.logo {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+/* Abas de navegação (Login/Cadastro) */
 .tab-switcher {
   display: flex;
   width: 100%;
@@ -43,8 +73,9 @@ body {
   margin-bottom: 20px;
 }
 
-.tab-btn {
-  flex: 1; /* Faz com que cada botão ocupe exatamente 50% da largura */
+.tab-btn,
+.auth-tab {
+  flex: 1;
   background: none;
   border: none;
   padding: 12px;
@@ -56,53 +87,38 @@ body {
   text-align: center;
 }
 
-.tab-btn.active {
+.tab-btn:hover,
+.auth-tab:hover {
+  color: white;
+}
+
+.tab-btn.active,
+.auth-tab.active {
   color: var(--accent) !important;
   border-bottom: 2px solid var(--accent);
 }
 
-.auth-page {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-}
-
-
-.logo {
-  font-size: 2rem;
-  font-weight: 700;
-  color: var(--accent);
-}
-
+/* Texto de apoio */
 .text-muted-custom {
   color: var(--text-muted);
   font-size: 0.9rem;
 }
 
-.auth-card {
-  background: var(--card-bg);
-  border-radius: 16px;
-  padding: 32px 28px;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+/* =====================================================
+   3. FORMULÁRIOS E INPUTS
+   ===================================================== */
+
+/* Labels */
+.form-label {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  margin-bottom: 4px;
 }
 
-
-.auth-tab.active {
-    color: var(--accent) !important; /* Rosa do seu projeto */
-    border-bottom: 3px solid var(--accent); /* Linha rosa embaixo */
-}
-
-.auth-tab:hover {
-    color: white;
-}
-
-/* Inputs */
-.form-label { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 4px; }
-
+/* Inputs personalizados */
 .custom-input {
   background: var(--input-bg) !important;
-  border: 1px solid #4a3f80 !important;
+  border: 1px solid var(--border-color) !important;
   color: #fff !important;
   border-radius: 10px !important;
   padding: 12px 14px !important;
@@ -110,12 +126,42 @@ body {
 
 .custom-input:focus {
   border-color: var(--accent) !important;
-  box-shadow: 0 0 0 3px rgba(255,99,71,0.15) !important;
+  box-shadow: 0 0 0 3px rgba(255, 99, 71, 0.15) !important;
 }
 
-.custom-input::placeholder { color: #6b5f9e !important; }
+.custom-input::placeholder {
+  color: #6b5f9e !important;
+}
 
-/* Botões */
+/* Mensagem de erro */
+.erro-msg {
+  color: var(--accent);
+  font-size: 0.85rem;
+  min-height: 20px;
+}
+
+/* Divisor de seção */
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border-color);
+}
+
+/* =====================================================
+   4. BOTÕES
+   ===================================================== */
+
+/* Botão primário */
 .btn-primary {
   background: var(--btn) !important;
   border: none !important;
@@ -126,42 +172,213 @@ body {
   text-decoration: none !important;
 }
 
-.btn-primary:hover { background: var(--accent) !important; }
+.btn-primary:hover {
+  background: var(--accent) !important;
+}
 
-.btn-google {
-  background: #fff !important;
-  color: #333 !important;
+/* Botão de favorito */
+.btn-fav {
+  background: none;
+  border: none;
+  font-size: 1.3rem;
+  cursor: pointer;
+}
+
+/* Botão de ação de review */
+.btn-review-action {
+  background: none;
+  border: 1px solid var(--border-color);
+  color: var(--text-muted);
+  border-radius: 20px;
+  padding: 4px 14px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: all 0.2s;
+}
+
+.btn-review-action:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* Botão de deletar review */
+.btn-del-review {
+  background: none;
+  border: 1px solid rgba(219, 2, 61, 0.3);
+  color: var(--btn);
+  border-radius: 20px;
+  padding: 4px 12px;
+  font-size: 0.78rem;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: all 0.2s;
+}
+
+.btn-del-review:hover {
+  background: var(--btn);
+  color: #fff;
+}
+
+/* Botão de deletar playlist */
+.btn-del-playlist {
+  background: none;
+  border: none;
+  font-size: 1.1rem;
+  cursor: pointer;
+  opacity: 0.5;
+  transition: opacity 0.2s;
+  padding: 6px;
+}
+
+.btn-del-playlist:hover {
+  opacity: 1;
+}
+
+/* Botão de avaliar track */
+.btn-track-review {
+  background: transparent;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  font-size: 0.7rem;
+  padding: 4px 8px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.btn-track-review:hover {
+  background: var(--accent);
+  color: white;
+}
+
+/* Botões de navegação */
+.btn-nav-outline {
+  padding: 8px 18px;
+  border: 2px solid var(--btn);
+  color: var(--btn);
+  border-radius: 50px;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+}
+
+.btn-nav-outline:hover {
+  background: var(--btn);
+  color: #fff;
+}
+
+.btn-nav-solid {
+  padding: 8px 18px;
+  background: var(--btn);
+  color: #fff;
+  border-radius: 50px;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: background 0.2s;
+}
+
+.btn-nav-solid:hover {
+  background: var(--accent);
+}
+
+/* Botão de configuração de perfil */
+.btn-config-perfil {
+  background: var(--input-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  font-size: 1.3rem;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+  flex-shrink: 0;
+  align-self: flex-start;
+}
+
+.btn-config-perfil:hover {
+  background: var(--btn);
+  transform: rotate(30deg);
+}
+
+/* Botão de perigo (ex: deletar conta) */
+.btn-danger-custom {
+  background: var(--btn) !important;
   border: none !important;
   border-radius: 10px !important;
-  padding: 11px !important;
+  padding: 12px !important;
+  color: #fff !important;
   font-weight: 600 !important;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  width: 100%;
+  cursor: pointer;
 }
 
-.btn-google:hover { background: #f0f0f0 !important; }
+.btn-danger-custom:hover {
+  background: #a80030 !important;
+}
 
-/* Divisor */
-.divider {
-  display: flex;
-  align-items: center;
-  gap: 12px;
+/* =====================================================
+   5. LANDING PAGE
+   ===================================================== */
+
+/* Seção Hero */
+.hero-section {
+  text-align: center;
+  padding: 60px 20px 48px;
+}
+
+.hero-title {
+  font-size: 2.4rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 12px;
+}
+
+.hero-sub {
   color: var(--text-muted);
-  font-size: 0.8rem;
-}
-.divider::before, .divider::after {
-  content: '';
-  flex: 1;
-  height: 1px;
-  background: #4a3f80;
+  font-size: 1.05rem;
+  max-width: 480px;
+  margin: 0 auto 28px;
+  line-height: 1.6;
 }
 
-.erro-msg { color: var(--accent); font-size: 0.85rem; min-height: 20px; }
+.hero-btn {
+  padding: 14px 36px !important;
+  font-size: 1rem !important;
+  border-radius: 50px !important;
+}
 
-/* ========================
-   APP GERAL
-======================== */
+/* Call to Action */
+.cta-box {
+  background: var(--card-bg);
+  border-radius: 16px;
+  padding: 36px 24px;
+  text-align: center;
+  margin-top: 48px;
+  border: 1px solid var(--border-color);
+}
+
+.cta-title {
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 1.3rem;
+  margin-bottom: 8px;
+}
+
+.cta-sub {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin-bottom: 24px;
+}
+
+/* =====================================================
+   6. APLICAÇÃO PRINCIPAL
+   ===================================================== */
+
+/* Body da aplicação */
 body.app-body,
 .app-body {
   background-color: var(--bg-body);
@@ -173,7 +390,22 @@ body.app-body,
   padding-bottom: 80px;
 }
 
-/* NAVBAR */
+/* Body padrão (para páginas de auth) */
+body {
+  background: var(--bg);
+  min-height: 100vh;
+  font-family: 'Segoe UI', sans-serif;
+  color: #f0f0f0;
+  display: flex;
+  margin: 0;
+  align-items: center;
+  justify-content: center;
+}
+
+/* =====================================================
+   7. BARRA DE NAVEGAÇÃO
+   ===================================================== */
+
 .navbar-custom {
   display: flex;
   justify-content: space-between;
@@ -210,14 +442,18 @@ body.app-body,
   color: var(--accent);
 }
 
-/* MAIN */
-.app-main { 
-  padding: 48px 32px; 
-  max-width: 1400px; 
-  margin: 0 auto; 
+/* =====================================================
+   8. LAYOUT PRINCIPAL
+   ===================================================== */
+
+/* Container principal */
+.app-main {
+  padding: 48px 32px;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
-/* SECTION HEADER */
+/* Cabeçalho de seção */
 .section-header {
   margin-bottom: 36px;
 }
@@ -235,10 +471,6 @@ body.app-body,
   margin: 0;
 }
 
-/* Saudação */
-.greeting-title { font-size: 1.5rem; font-weight: 700; color: #fff; }
-.greeting-sub   { color: var(--text-muted); font-size: 0.95rem; }
-
 /* Títulos de seção */
 .section-title {
   font-size: 1.2rem;
@@ -249,12 +481,27 @@ body.app-body,
   letter-spacing: 0.05em;
 }
 
-/* GRID DE CARDS */
-/* No seu arquivo style.css */
+/* Saudação */
+.greeting-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.greeting-sub {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+/* =====================================================
+   9. GRIDS E LAYOUTS
+   ===================================================== */
+
+/* Grid responsivo de cards */
 .grid-container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); /* Aumentei um pouco o mínimo para os cards não ficarem tão apertados */
-  gap: 32px; /* Aumente este valor (ex: de 20px para 32px) para dar mais espaço */
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 32px;
   margin-bottom: 48px;
 }
 
@@ -275,7 +522,7 @@ body.app-body,
   }
 }
 
-/* SCROLL ROW (para compatibilidade) */
+/* Scroll horizontal */
 .scroll-row-wrap {
   position: relative;
   overflow: hidden;
@@ -299,6 +546,7 @@ body.app-body,
   scroll-snap-align: start;
 }
 
+/* Botões de scroll */
 .scroll-button {
   position: absolute;
   top: 50%;
@@ -311,7 +559,7 @@ body.app-body,
   color: #fff;
   font-size: 1.6rem;
   cursor: pointer;
-  box-shadow: 0 10px 24px rgba(0,0,0,0.28);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.28);
   z-index: 10;
 }
 
@@ -327,11 +575,35 @@ body.app-body,
   right: 12px;
 }
 
+/* Vitrines (fileira horizontal) */
+#vitrine-publica,
+#vitrine-musicas {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  gap: 20px;
+  scrollbar-width: none;
+  scroll-behavior: smooth;
+}
 
-/* CARDS DE MÚSICA */
+#vitrine-publica::-webkit-scrollbar,
+#vitrine-musicas::-webkit-scrollbar {
+  display: none;
+}
+
+.music-card-container {
+  flex: 0 0 auto;
+  width: 240px;
+}
+
+/* =====================================================
+   10. CARDS DE MÚSICA
+   ===================================================== */
+
+/* Card de música (scroll row) */
 .music-card {
-  flex: 0 0 220px;
-  min-width: 220px;
+  flex: 0 0 320px;
+  min-width: 320px;
   background: rgba(19, 11, 38, 0.96);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 20px;
@@ -344,119 +616,24 @@ body.app-body,
   flex-direction: column;
 }
 
-.genero-card{
-  flex: 0 0 180px;
-  min-width: 180px;
-  background: rgba(19, 11, 38, 0.96);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 20px;
-  padding: 16px;
-  cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  overflow: hidden;
-  position: relative;
-  margin-left: 2px;
-  margin-bottom: 10px;
-}
-
-.fab-button {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    width: 60px;
-    height: 60px;
-    background-color: #e81856; /* Cor rosa do Vinyl */
-    color: white;
-    border-radius: 50%;
-    border: none;
-    box-shadow: 0 4px 15px rgba(232, 24, 86, 0.4);
-    font-size: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    z-index: 999;
-    transition: transform 0.2s, background-color 0.2s;
-}
-
-.fab-button:hover {
-    transform: scale(1.1);
-    background-color: #ff2e6d;
-}
-/* Container posicionado no canto */
-.fab-container {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    z-index: 1000;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-}
-
-/* Botão Principal */
-.fab-main {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background: #e81856; /* Cor padrão do seu projeto */
-    color: white;
-    border: none;
-    font-size: 30px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-    cursor: pointer;
-    transition: transform 0.3s;
-}
-
-.fab-main.active {
-    transform: rotate(45deg); /* Gira o + para virar um X */
-    background: #555;
-}
-
-/* Opções que ficam escondidas */
-.fab-options {
-    display: none; /* Escondido por padrão */
-    flex-direction: column;
-    align-items: flex-end;
-    margin-bottom: 15px;
-    gap: 10px;
-}
-
-.fab-item {
-    display: flex;
-    align-items: center;
-    background: none;
-    border: none;
-    cursor: pointer;
-}
-
-.fab-label {
-    background: #2a2540;
-    color: white;
-    padding: 5px 12px;
-    border-radius: 8px;
-    margin-right: 10px;
-    font-size: 14px;
-    border: 1px solid #e81856;
-}
-
-.fab-icon {
-    width: 45px;
-    height: 45px;
-    background: #e81856;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+/* Card de música (vitrines) */
+#vitrine-publica .music-card,
+#vitrine-musicas .music-card,
+.music-card-container .music-card {
+  background: var(--bg-card);
+  padding: 12px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  flex: none;
+  min-width: auto;
 }
 
 .music-card:hover {
-    transform: translateY(-5px);
-    border: 1px solid #e81856 !important;
+  transform: translateY(-5px);
+  border: 1px solid var(--accent) !important;
 }
 
+/* Capa do card */
 .music-cover {
   width: 100%;
   height: 180px;
@@ -471,8 +648,22 @@ body.app-body,
   background-position: center;
 }
 
+/* Capa nas vitrines */
+#vitrine-publica .music-cover,
+#vitrine-musicas .music-cover,
+.music-card-container .music-cover {
+  aspect-ratio: 1/1;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 10px;
+  border-bottom: none;
+}
+
 .music-cover img {
   transition: transform 0.5s ease;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .music-card:hover .music-cover img {
@@ -483,9 +674,10 @@ body.app-body,
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0.12) 45%, rgba(0,0,0,0.2) 100%);
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.08) 0%, rgba(0, 0, 0, 0.12) 45%, rgba(0, 0, 0, 0.2) 100%);
 }
 
+/* Informações do card */
 .music-card .music-title {
   position: relative;
   margin: 0;
@@ -513,395 +705,7 @@ body.app-body,
   background: transparent;
 }
 
-.music-card-favorite {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  width: 34px;
-  height: 34px;
-  background: rgba(0,0,0,0.45);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.1rem;
-  cursor: pointer;
-  z-index: 12;
-  transition: background 0.2s;
-}
-
-.music-card-favorite:hover {
-  background: rgba(0,0,0,0.7);
-}
-
-/* REVIEW CARDS */
-.review-card {
-    background: rgba(255, 255, 255, 0.05);
-    padding: 15px;
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.review-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-
-
-.review-avatar {
-  width: 42px; height: 42px;
-  background: var(--input-bg);
-  border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 1.2rem;
-}
-
-.review-user  { font-size: 0.85rem; font-weight: 600; color: var(--accent); margin: 0; }
-.review-music { font-size: 0.75rem; color: var(--text-muted); margin: 0; }
-.review-stars { color: #FFD700; font-size: 1rem; }
-.review-text  { font-size: 0.85rem; color: #ccc; margin: 0; font-style: italic; }
-
-/* PLAYLIST CARDS */
-.playlist-card {
-  flex: 0 0 110px;
-  background: var(--card-bg);
-  border-radius: 12px;
-  padding: 14px 10px;
-  text-align: center;
-  cursor: pointer;
-  transition: transform 0.2s;
-}
-
-.playlist-card:hover { transform: translateY(-4px); }
-
-.playlist-cover {
-  font-size: 2rem;
-  margin-bottom: 8px;
-}
-
-.playlist-name  { font-size: 0.82rem; font-weight: 600; color: #fff; margin: 0; }
-.playlist-count { font-size: 0.72rem; color: var(--text-muted); margin: 0; }
-
-/* BOTÃO FLUTUANTE */
-.fab {
-  position: fixed;
-  bottom: 28px;
-  right: 24px;
-  width: 58px;
-  height: 58px;
-  background: var(--btn);
-  color: #fff;
-  border: none;
-  border-radius: 50%;
-  font-size: 2rem;
-  cursor: pointer;
-  box-shadow: 0 6px 20px rgba(219,2,61,0.5);
-  transition: background 0.2s, transform 0.2s;
-  z-index: 200;
-}
-
-.fab:hover { background: var(--accent); transform: scale(1.1); }
-
-.fab.aberto { transform: rotate(45deg); background: var(--accent); }
-
-/* FAB MENU */
-.fab-menu {
-  position: fixed;
-  bottom: 100px;
-  right: 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  z-index: 199;
-}
-
-.fab-option {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  background: var(--card-bg);
-  border: 1px solid #4a3f80;
-  border-radius: 50px;
-  padding: 10px 18px 10px 12px;
-  color: #fff;
-  cursor: pointer;
-  font-size: 0.9rem;
-  transition: background 0.2s, transform 0.2s;
-  white-space: nowrap;
-}
-
-.fab-option:hover { background: var(--btn); transform: scale(1.03); }
-
-.fab-option-icon  { font-size: 1.2rem; }
-.fab-option-label { font-weight: 600; }
-
-/* MODAL */
-.modal-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.6);
-  z-index: 300;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.modal-box {
-  background: var(--card-bg);
-  border-radius: 16px;
-  padding: 28px;
-  width: 90%;
-  max-width: 420px;
-}
-
-.modal-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.modal-header h5 { color: var(--accent); font-weight: 700; margin: 0; }
-
-.modal-close {
-  background: none;
-  border: none;
-  color: var(--text-muted);
-  font-size: 1.2rem;
-  cursor: pointer;
-}
-
-.star-selector { display: flex; gap: 8px; }
-
-.star {
-  font-size: 1.8rem;
-  color: #4a3f80;
-  cursor: pointer;
-  transition: color 0.15s;
-}
-
-.star.ativa { color: #FFD700; }
-
-/* SCROLLBAR */
-::-webkit-scrollbar { height: 4px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: var(--btn); border-radius: 4px; }
-
-/* PERFIL */
-.perfil-header {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  margin-bottom: 28px;
-}
-
-.perfil-avatar {
-  width: 80px; height: 80px;
-  background: var(--btn);
-  border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 2.4rem;
-  flex-shrink: 0;
-}
-
-.perfil-nome  { font-size: 1.3rem; font-weight: 700; color: var(--accent); margin: 0; }
-.perfil-email { font-size: 0.85rem; color: var(--text-muted); margin: 0; }
-.perfil-data  { font-size: 0.8rem; color: var(--text-muted); margin: 0; }
-
-.perfil-stats {
-  display: flex;
-  gap: 12px;
-}
-
-.stat-item {
-  flex: 1;
-  background: var(--card-bg);
-  border-radius: 12px;
-  padding: 16px;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-
-.config-card {
-  background: var(--card-bg);
-  border-radius: 14px;
-  padding: 20px;
-  margin-bottom: 28px;
-}
-
-.btn-danger-custom {
-  background: var(--btn) !important;
-  border: none !important;
-  border-radius: 10px !important;
-  padding: 12px !important;
-  color: #fff !important;
-  font-weight: 600 !important;
-  width: 100%;
-  cursor: pointer;
-}
-
-.btn-danger-custom:hover { background: #a80030 !important; }
-
-/* BUSCA */
-.busca-wrapper {
-  position: relative;
-}
-
-.busca-input { padding-right: 44px !important; }
-
-.busca-icon {
-  position: absolute;
-  right: 14px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 1.1rem;
-}
-
-.result-card {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  background: var(--card-bg);
-  border-radius: 12px;
-  padding: 12px 16px;
-  margin-bottom: 10px;
-}
-
-.btn-fav {
-  background: none;
-  border: none;
-  font-size: 1.3rem;
-  cursor: pointer;
-}
-
-.vazio-box {
-  text-align: center;
-  margin-top: 60px;
-}
-
-/* GÊNEROS */
-.genre-pill {
-  padding: 16px 20px;
-  border-radius: 12px;
-  color: #fff;
-  font-weight: 600;
-  font-size: 0.95rem;
-  cursor: pointer;
-  transition: transform 0.2s, opacity 0.2s, box-shadow 0.2s;
-  text-align: center;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-}
-
-.genre-pill:hover { 
-  transform: translateY(-4px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
-}
-
-/* LANDING PAGE */
-.hero-section {
-  text-align: center;
-  padding: 60px 20px 48px;
-}
-
-.hero-title {
-  font-size: 2.4rem;
-  font-weight: 800;
-  color: #fff;
-  margin-bottom: 12px;
-}
-
-.hero-sub {
-  color: var(--text-muted);
-  font-size: 1.05rem;
-  max-width: 480px;
-  margin: 0 auto 28px;
-  line-height: 1.6;
-}
-
-.hero-btn {
-  padding: 14px 36px !important;
-  font-size: 1rem !important;
-  border-radius: 50px !important;
-}
-
-.btn-nav-outline {
-  padding: 8px 18px;
-  border: 2px solid var(--btn);
-  color: var(--btn);
-  border-radius: 50px;
-  font-weight: 600;
-  text-decoration: none;
-  font-size: 0.9rem;
-  transition: all 0.2s;
-}
-
-.btn-nav-outline:hover {
-  background: var(--btn);
-  color: #fff;
-}
-
-.btn-nav-solid {
-  padding: 8px 18px;
-  background: var(--btn);
-  color: #fff;
-  border-radius: 50px;
-  font-weight: 600;
-  text-decoration: none;
-  font-size: 0.9rem;
-  transition: background 0.2s;
-}
-
-.btn-nav-solid:hover { background: var(--accent); }
-
-/* VITRINES - FILEIRA ÚNICA */
-#vitrine-publica,
-#vitrine-musicas {
-  display: flex;
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  gap: 20px;
-  padding: 10px 5px 20px 5px;
-  scrollbar-width: none;
-  scroll-behavior: smooth;
-  padding: 5px;
-}
-
-#vitrine-publica::-webkit-scrollbar,
-#vitrine-musicas::-webkit-scrollbar {
-  display: none;
-}
-
-.music-card-container {
-  flex: 0 0 auto;
-  width: 180px;
-}
-
-.music-card {
-  background: var(--bg-card);
-  padding: 12px;
-  border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.music-cover {
-  width: 100%;
-  aspect-ratio: 1/1;
-  border-radius: 12px;
-  overflow: hidden;
-  margin-bottom: 10px;
-}
-
-.music-cover img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
+/* Títulos em vitrines */
 .music-title-card {
   font-size: 0.95rem;
   font-weight: 700;
@@ -916,132 +720,125 @@ body.app-body,
   color: var(--text-muted);
 }
 
-.review-card {
-    background: var(--bg-card);
-    border-radius: 20px;
-    padding: 20px;
-    margin-bottom: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    transition: transform 0.2s;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-}
-
-.review-card:hover {
-    transform: translateY(-5px);
-}
-
-.review-header {
-    display: flex;
-    align-items: center;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    padding-bottom: 12px;
-    margin-bottom: 12px;
-}
-
-.review-avatar {
-    width: 45px;
-    height: 45px;
-    background: linear-gradient(45deg, var(--accent), #ff4d7d);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.2rem;
-    box-shadow: 0 0 10px rgba(232, 24, 86, 0.3);
-}
-
-.review-user {
-    font-weight: 700;
-    color: var(--accent);
-    font-size: 0.95rem;
-}
-
-.review-music {
-    font-size: 0.85rem;
-    color: var(--text-main);
-    opacity: 0.9;
-}
-
-.review-text {
-    font-size: 0.95rem;
-    line-height: 1.6;
-    color: var(--text-muted);
-    font-style: italic;
-    margin: 0;
-}
-
-.card-stars {
-  color: #FFD700;
-  font-size: 0.75rem;
-  margin-top: 4px;
-}
-
-.btn-review-action {
-  background: none;
-  border: 1px solid #4a3f80;
-  color: var(--text-muted);
-  border-radius: 20px;
-  padding: 4px 14px;
-  font-size: 0.8rem;
-  cursor: pointer;
-  margin-top: 10px;
-  transition: all 0.2s;
-}
-
-.btn-review-action:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-}
-
-.cta-box {
-  background: var(--card-bg);
-  border-radius: 16px;
-  padding: 36px 24px;
-  text-align: center;
-  margin-top: 48px;
-  border: 1px solid #4a3f80;
-}
-.sugestoes-box {
-    max-height: 200px;
-    overflow-y: auto;
-    background: #2a2540 !important; /* Cor do fundo do card */
-}
-
-.sugestao-item:hover {
-    background: rgba(232, 24, 86, 0.2); /* Cor de destaque ao passar o mouse */
-}
-
-.cta-title { color: var(--accent); font-weight: 700; font-size: 1.3rem; margin-bottom: 8px; }
-.cta-sub   { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 24px; }
-
-/* ABAS DO PERFIL */
-.perfil-abas {
+/* Botão de favorito no card */
+.music-card-favorite {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 34px;
+  height: 34px;
+  background: rgba(0, 0, 0, 0.45);
+  border-radius: 50%;
   display: flex;
-  background: var(--input-bg);
-  border-radius: 10px;
-  padding: 4px;
-  gap: 4px;
-}
-
-.aba {
-  flex: 1;
-  border: none;
-  background: transparent;
-  color: var(--text-muted);
-  padding: 10px 8px;
-  border-radius: 8px;
-  font-weight: 600;
-  font-size: 0.82rem;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
   cursor: pointer;
-  transition: all 0.2s;
+  z-index: 12;
+  transition: background 0.2s;
 }
 
-.aba.active {
-  background: var(--btn);
+.music-card-favorite:hover {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+/* =====================================================
+   11. CARDS DE GÊNERO
+   ===================================================== */
+
+.genero-card {
+  flex: 0 0 180px;
+  min-width: 180px;
+  background: rgba(19, 11, 38, 0.96);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 16px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+  position: relative;
+  margin-left: 2px;
+  margin-bottom: 10px;
+}
+
+/* Pílulas de gênero */
+.genre-pill {
+  padding: 16px 20px;
+  border-radius: 12px;
   color: #fff;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: transform 0.2s, opacity 0.2s, box-shadow 0.2s;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-/* PLAYLIST NO PERFIL */
+.genre-pill:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* Círculos de artista */
+.artist-circle {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  background: linear-gradient(135deg, #3a3251, #1e1b2e);
+  margin-bottom: 10px;
+}
+
+.artist-circle:hover {
+  transform: scale(1.08);
+  border-color: var(--accent);
+}
+
+/* =====================================================
+   12. CARDS DE PLAYLIST
+   ===================================================== */
+
+/* Playlist pequena */
+.playlist-card {
+  flex: 0 0 110px;
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 14px 10px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.2s;
+  
+}
+
+.playlist-card:hover {
+  transform: translateY(-4px);
+}
+
+.playlist-cover {
+  font-size: 2rem;
+  margin-bottom: 8px;
+}
+
+.playlist-name {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #fff;
+  margin: 0;
+
+}
+
+.playlist-count {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+/* Playlist no perfil */
 .playlist-card-perfil {
   background: var(--card-bg);
   border-radius: 12px;
@@ -1068,37 +865,594 @@ body.app-body,
   flex-shrink: 0;
 }
 
-.btn-del-playlist {
-  background: none;
-  border: none;
-  font-size: 1.1rem;
+/* Playlist v2 */
+.playlist-card-v2 {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 15px;
+  text-align: center;
   cursor: pointer;
-  opacity: 0.5;
-  transition: opacity 0.2s;
-  padding: 6px;
+  transition: transform 0.2s, background 0.2s;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  height: 100%;
 }
 
-.btn-del-playlist:hover { opacity: 1; }
+.playlist-card-v2:hover {
+  transform: translateY(-5px);
+  background: rgba(232, 24, 86, 0.1);
+  border-color: var(--accent);
+}
 
-/* REVIEW APAGAR */
-.btn-del-review {
-  background: none;
-  border: 1px solid rgba(219,2,61,0.3);
-  color: var(--btn);
+.playlist-capa-dinamica {
+  width: 100%;
+  aspect-ratio: 1/1;
+  border-radius: 8px;
+  object-fit: cover;
+  margin-bottom: 10px;
+  background: #2a2540;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+}
+
+/* Itens da playlist */
+.musica-item-playlist {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.03);
+  margin-bottom: 8px;
+  border-radius: 8px;
+}
+
+.musica-item-playlist img {
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+  margin-right: 15px;
+}
+
+/* =====================================================
+   13. CARDS DE REVIEW
+   ===================================================== */
+
+/* Card de review - estilo principal */
+.review-card {
+  background: var(--bg-card);
   border-radius: 20px;
-  padding: 4px 12px;
-  font-size: 0.78rem;
+  padding: 20px;
+  margin-bottom: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: transform 0.2s;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Review em contexto de lista */
+.review-section .review-card,
+.reviews-list .review-card {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 15px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 15px;
+}
+
+.review-card:hover {
+  transform: translateY(-5px);
+}
+
+/* Cabeçalho do review */
+.review-header {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 12px;
+  margin-bottom: 12px;
+}
+
+/* Header em contexto de lista */
+.review-section .review-header,
+.reviews-list .review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: none;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
+/* Avatar do review */
+.review-avatar {
+  width: 45px;
+  height: 45px;
+  background: linear-gradient(45deg, var(--accent), #ff4d7d);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  box-shadow: 0 0 10px rgba(232, 24, 86, 0.3);
+}
+
+/* Avatar em contexto de lista */
+.review-section .review-avatar,
+.reviews-list .review-avatar {
+  width: 42px;
+  height: 42px;
+  background: var(--input-bg);
+  box-shadow: none;
+}
+
+/* Usuário do review */
+.review-user {
+  font-weight: 700;
+  color: var(--accent);
+  font-size: 0.95rem;
+}
+
+/* Usuário em contexto de lista */
+.review-section .review-user,
+.reviews-list .review-user {
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+/* Música do review */
+.review-music {
+  font-size: 0.85rem;
+  color: var(--text-main);
+  opacity: 0.9;
+}
+
+/* Música em contexto de lista */
+.review-section .review-music,
+.reviews-list .review-music {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* Texto do review */
+.review-text {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+  font-style: italic;
+  margin: 0;
+}
+
+/* Texto em contexto de lista */
+.review-section .review-text,
+.reviews-list .review-text {
+  font-size: 0.85rem;
+  color: #ccc;
+}
+
+/* Estrelas do review */
+.review-stars {
+  color: #FFD700;
+  font-size: 1rem;
+}
+
+.card-stars {
+  color: #FFD700;
+  font-size: 0.75rem;
+  margin-top: 4px;
+}
+
+/* =====================================================
+   14. BOTÕES FLUTUANTES (FAB)
+   ===================================================== */
+
+/* FAB simples */
+.fab {
+  position: fixed;
+  bottom: 28px;
+  right: 24px;
+  width: 58px;
+  height: 58px;
+  background: var(--btn);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  font-size: 2rem;
   cursor: pointer;
-  margin-top: 10px;
+  box-shadow: 0 6px 20px rgba(219, 2, 61, 0.5);
+  transition: background 0.2s, transform 0.2s;
+  z-index: 200;
+}
+
+.fab:hover {
+  background: var(--accent);
+  transform: scale(1.1);
+}
+
+.fab.aberto {
+  transform: rotate(45deg);
+  background: var(--accent);
+}
+
+/* Menu FAB */
+.fab-menu {
+  position: fixed;
+  bottom: 100px;
+  right: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 199;
+}
+
+.fab-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 50px;
+  padding: 10px 18px 10px 12px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background 0.2s, transform 0.2s;
+  white-space: nowrap;
+}
+
+.fab-option:hover {
+  background: var(--btn);
+  transform: scale(1.03);
+}
+
+.fab-option-icon {
+  font-size: 1.2rem;
+}
+
+.fab-option-label {
+  font-weight: 600;
+}
+
+/* FAB v2 (container com opções) */
+.fab-container {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.fab-main {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #e81856;
+  color: white;
+  border: none;
+  font-size: 30px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.fab-main.active {
+  transform: rotate(45deg);
+  background: #555;
+}
+
+.fab-options {
+  display: none;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-bottom: 15px;
+  gap: 10px;
+}
+
+.fab-item {
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.fab-label {
+  background: #2a2540;
+  color: white;
+  padding: 5px 12px;
+  border-radius: 8px;
+  margin-right: 10px;
+  font-size: 14px;
+  border: 1px solid #e81856;
+}
+
+.fab-icon {
+  width: 45px;
+  height: 45px;
+  background: #e81856;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* FAB button simples */
+.fab-button {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 60px;
+  height: 60px;
+  background-color: #e81856;
+  color: white;
+  border-radius: 50%;
+  border: none;
+  box-shadow: 0 4px 15px rgba(232, 24, 86, 0.4);
+  font-size: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 999;
+  transition: transform 0.2s, background-color 0.2s;
+}
+
+.fab-button:hover {
+  transform: scale(1.1);
+  background-color: #ff2e6d;
+}
+
+/* =====================================================
+   15. MODAL
+   ===================================================== */
+
+/* Overlay do modal */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Caixa do modal */
+.modal-box {
+  background: var(--card-bg);
+  border-radius: 16px;
+  padding: 28px;
+  width: 90%;
+  max-width: 420px;
+}
+
+/* Cabeçalho do modal */
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.modal-header h5 {
+  color: var(--accent);
+  font-weight: 700;
+  margin: 0;
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+/* Seletor de estrelas */
+.star-selector {
+  display: flex;
+  gap: 8px;
+}
+
+.star {
+  font-size: 1.8rem;
+  color: #4a3f80;
+  cursor: pointer;
+  transition: color 0.15s;
+}
+
+.star.ativa {
+  color: #FFD700;
+}
+
+/* =====================================================
+   16. PERFIL
+   ===================================================== */
+
+/* Cabeçalho do perfil */
+.perfil-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 28px;
+}
+
+.perfil-avatar {
+  width: 80px;
+  height: 80px;
+  background: var(--btn);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.4rem;
+  flex-shrink: 0;
+}
+
+.perfil-nome {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin: 0;
+}
+
+.perfil-email {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.perfil-data {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+/* Estatísticas do perfil */
+.perfil-stats {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.stat-item {
+  flex: 1;
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 16px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* Card de configuração */
+.config-card {
+  background: var(--card-bg);
+  border-radius: 14px;
+  padding: 20px;
+  margin-bottom: 28px;
+}
+
+/* =====================================================
+   17. BUSCA
+   ===================================================== */
+
+/* Wrapper da busca */
+.busca-wrapper {
+  position: relative;
+}
+
+.busca-input {
+  padding-right: 44px !important;
+}
+
+.busca-icon {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.1rem;
+}
+
+/* Card de resultado */
+.result-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 12px 16px;
+  margin-bottom: 10px;
+}
+
+/* Caixa vazia */
+.vazio-box {
+  text-align: center;
+  margin-top: 60px;
+}
+
+/* =====================================================
+   18. ABAS
+   ===================================================== */
+
+/* Abas do perfil */
+.perfil-abas {
+  display: flex;
+  border-radius: 10px;
+  padding: 4px;
+  gap: 51px;
+}
+
+.aba {
+  flex: 1;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  padding: 10px 8px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.82rem;
+  cursor: pointer;
   transition: all 0.2s;
 }
 
-.btn-del-review:hover {
+.aba.active {
   background: var(--btn);
   color: #fff;
 }
 
-/* CONFIG SECTIONS */
+/* Itens de aba */
+.aba-item {
+  cursor: pointer;
+  color: var(--text-muted);
+  font-weight: 600;
+  padding-bottom: 5px;
+  transition: 0.3s;
+  border-bottom: 2px solid transparent;
+}
+
+.aba-item.active {
+  color: var(--accent);
+  border-bottom: 2px solid var(--accent);
+}
+
+.aba-item:hover {
+  color: white;
+}
+
+/* =====================================================
+   19. ELEMENTOS DIVERSOS
+   ===================================================== */
+
+/* Scrollbar personalizada */
+::-webkit-scrollbar {
+  height: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--btn);
+  border-radius: 4px;
+}
+
+/* Sugestões */
+.sugestoes-box {
+  max-height: 200px;
+  overflow-y: auto;
+  background: #2a2540 !important;
+}
+
+.sugestao-item:hover {
+  background: rgba(232, 24, 86, 0.2);
+}
+
+/* Configurações */
 .config-section-title {
   color: var(--accent);
   font-weight: 700;
@@ -1108,28 +1462,10 @@ body.app-body,
   letter-spacing: 0.05em;
 }
 
-.btn-config-perfil {
-  background: var(--input-bg);
-  border: 1px solid #4a3f80;
-  border-radius: 50%;
-  width: 44px;
-  height: 44px;
-  font-size: 1.3rem;
-  cursor: pointer;
-  transition: background 0.2s, transform 0.2s;
-  flex-shrink: 0;
-  align-self: flex-start;
-}
-
-.btn-config-perfil:hover {
-  background: var(--btn);
-  transform: rotate(30deg);
-}
-
 .config-grupo {
   margin-bottom: 20px;
   padding-bottom: 20px;
-  border-bottom: 1px solid #4a3f80;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .config-grupo:last-child {
@@ -1138,147 +1474,77 @@ body.app-body,
   padding-bottom: 0;
 }
 
-/* Bolinhas com cores e estilo Spotify */
-.artist-circle {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border: 3px solid rgba(255, 255, 255, 0.1);
-    background: linear-gradient(135deg, #3a3251, #1e1b2e); /* Cor padrão */
-    margin-bottom: 10px;
-}
-
-.artist-circle:hover {
-    transform: scale(1.08);
-    border-color: var(--accent);
-}
-
-
+/* Dropdown de músicas */
 .musicas-dropdown-v2 {
-    background: #1e1b2e; /* Mesma cor dos cards para unidade visual */
-    border-radius: 12px;
-    padding: 8px;
-    margin-top: 15px;
-    border: 1px solid rgba(232, 24, 86, 0.3);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    width: 100%;
-    max-width: 320px;
+  background: #1e1b2e;
+  border-radius: 12px;
+  padding: 8px;
+  margin-top: 15px;
+  border: 1px solid rgba(232, 24, 86, 0.3);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  width: 100%;
+  max-width: 320px;
 }
 
-
-
+/* Track items */
 .track-item:hover {
-    background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .track-img {
-    width: 45px;
-    height: 45px;
-    border-radius: 6px;
-    object-fit: cover;
-    margin-right: 12px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  width: 45px;
+  height: 45px;
+  border-radius: 6px;
+  object-fit: cover;
+  margin-right: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 .track-info {
-    flex: 1;
-    text-align: left;
+  flex: 1;
+  text-align: left;
 }
 
 .track-name {
-    color: #fff;
-    font-size: 0.9rem;
-    font-weight: 600;
-    margin: 0;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-/* Botão de Avaliar pequeno e elegante */
-.btn-track-review {
-    background: transparent;
-    border: 1px solid var(--accent);
-    color: var(--accent);
-    font-size: 0.7rem;
-    padding: 4px 8px;
-    border-radius: 20px;
-    text-transform: uppercase;
-    font-weight: bold;
-    transition: 0.3s;
-}
-
-.btn-track-review:hover {
-    background: var(--accent);
-    color: white;
-}
-
-/* Container das playlists */
-.playlist-card-v2 {
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 12px;
-    padding: 15px;
-    text-align: center;
-    cursor: pointer;
-    transition: transform 0.2s, background 0.2s;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    height: 100%;
-}
-
-.playlist-card-v2:hover {
-    transform: translateY(-5px);
-    background: rgba(232, 24, 86, 0.1);
-    border-color: var(--accent);
-}
-
-.playlist-capa-dinamica {
-    width: 100%;
-    aspect-ratio: 1/1;
-    border-radius: 8px;
-    object-fit: cover;
-    margin-bottom: 10px;
-    background: #2a2540; /* Cor de fundo caso não tenha foto */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2rem;
-}
-
-/* Lista de músicas ao abrir */
-.musica-item-playlist {
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    background: rgba(255,255,255,0.03);
-    margin-bottom: 8px;
-    border-radius: 8px;
-}
-
-.musica-item-playlist img {
-    width: 40px;
-    height: 40px;
-    border-radius: 4px;
-    margin-right: 15px;
-}
-.aba-item {
-    cursor: pointer;
-    color: var(--text-muted);
-    font-weight: 600;
-    padding-bottom: 5px;
-    transition: 0.3s;
-    border-bottom: 2px solid transparent;
-}
-
-.aba-item.active {
-    color: var(--accent);
-    border-bottom: 2px solid var(--accent);
-}
-
-.aba-item:hover {
-    color: white;
-}
+ /* Estilos específicos para as setas de navegação da vitrine no index */
+    .vitrine-container {
+        position: relative;
+        display: flex;
+        align-items: center;
+    }
+    .btn-scroll {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(30, 27, 46, 0.8);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: white;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 10;
+        transition: 0.3s;
+    }
+    .btn-scroll:hover {
+        background: var(--accent);
+    }
+    .btn-left { left: -20px; }
+    .btn-right { right: -20px; }
+    
+    /* Ajuste para não quebrar o layout mobile */
+    @media (max-width: 768px) {
+        .btn-scroll { display: none; }
+    }

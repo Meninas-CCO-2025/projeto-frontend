@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 # 🎵 Vinyl - Letterbox de Música
+=======
+guu# 🎵 Vinyl - Letterbox de Música
+>>>>>>> V-9.0
 
 ## 📌 Descrição do Projeto
 
@@ -90,4 +94,8 @@ vinyl/
 * Giovana de Godoy Felisbino - 2507579
 * Giovanna Falgetano - 2512938
 * Glória Mariano - 2504112
+<<<<<<< HEAD
 * Lais da Rosa Câmara - 2505420
+=======
+* Lais da Rosa Câmara - 2505420
+>>>>>>> V-9.0

@@ -2,9 +2,9 @@
 
 async function filtrarPorGenero(generoAlvo) {
     const container = document.getElementById('resultado-explorar');
-    
+
     // Feedback visual de carregamento
-    container.innerHTML = `<p style="color:white; margin: 20px;">Explorando músicas de ${generoAlvo}...</p>`;
+    container.innerHTML = `<p style=\"color:white; margin: 20px;\">Explorando músicas de ${generoAlvo}...</p>`;
 
     try {
         // O termo %genero% faz o banco buscar a palavra em qualquer lugar da frase
@@ -16,31 +16,42 @@ async function filtrarPorGenero(generoAlvo) {
         if (error) throw error;
 
         if (!musicas || musicas.length === 0) {
-            container.innerHTML = `<p style="color:gray; margin: 20px;">Nenhuma música encontrada para o gênero "${generoAlvo}".</p>`;
+            container.innerHTML = `<p style=\"color:gray; margin: 20px;\">Nenhuma música encontrada para o gênero \"${generoAlvo}\".</p>`;
             return;
         }
 
-        // Renderiza os cards
-        container.innerHTML = musicas.map(m => `
-            <div class="col-6 col-md-3 mb-4">
-                <div class="music-card" style="background:#1e1b2e; padding:15px; border-radius:16px; height:100%; border: 1px solid rgba(255,255,255,0.05); position:relative;">
-                    <div class="music-cover" style="width:100%; aspect-ratio:1/1; border-radius:12px; overflow:hidden; margin-bottom:12px;">
-                        <img src="${m.capa_url}" style="width:100%; height:100%; object-fit:cover;" onerror="this.src='https://via.placeholder.com/150?text=🎵'">
-                    </div>
-                    <h5 style="color:white; font-size:1rem; margin:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;" title="${m.titulo}">
-                        ${m.titulo}
-                    </h5>
-                    <p style="color:#a89ec9; font-size:0.8rem; margin-bottom:10px;">${m.artista}</p>
-                    <div style="display:flex; flex-wrap:wrap; gap:5px;">
-                        ${m.genero.split(',').map(g => `
-                            <span style="font-size:0.65rem; background:rgba(232,24,86,0.15); color:#e81856; padding:2px 8px; border-radius:10px; font-weight:bold;">
-                                ${g.trim()}
-                            </span>
-                        `).join('')}
+        // Pega os favoritos salvos no localStorage para marcar o coração preenchido
+        const favsLocais = JSON.parse(localStorage.getItem('meus_favoritos') || '[]');
+
+        // Renderiza os cards mantendo a estrutura intacta e adicionando o coração
+        container.innerHTML = musicas.map(m => {
+            const isFav = favsLocais.includes(String(m.id)) || favsLocais.includes(parseInt(m.id));
+            return `
+                <div class="col-6 col-md-3 mb-4">
+                    <div class="music-card" style="background:#1e1b2e; padding:15px; border-radius:16px; height:100%; border: 1px solid rgba(255,255,255,0.05); position:relative;">
+                        
+                        <button onclick="alternarFavoritoDoMain('${m.id}')" id="btn-fav-main-${m.id}" style="position:absolute; bottom:15px; right:15px; background:rgba(0,0,0,0.6); border:none; font-size:1.2rem; cursor:pointer; z-index:10; border-radius:50%; width:32px; height:32px; display:flex; align-items:center; justify-content:center;">
+                            ${isFav ? '❤️' : '🤍'}
+                        </button>
+
+                        <div class="music-cover" style="width:100%; aspect-ratio:1/1; border-radius:12px; overflow:hidden; margin-bottom:12px;">
+                            <img src="${m.capa_url}" style="width:100%; height:100%; object-fit:cover;" onerror="this.src='https://via.placeholder.com/150?text=🎵'">
+                        </div>
+                        <h5 style="color:white; font-size:1rem; margin:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;" title="${m.titulo}">
+                            ${m.titulo}
+                        </h5>
+                        <p style="color:#a89ec9; font-size:0.8rem; margin-bottom:10px;">${m.artista}</p>
+                        <div style="display:flex; flex-wrap:wrap; gap:5px;">
+                            ${m.genero.split(',').map(g => `
+                                <span style="font-size:0.65rem; background:rgba(232,24,86,0.15); color:#e81856; padding:2px 8px; border-radius:10px; font-weight:bold;">
+                                    ${g.trim()}
+                                </span>
+                            `).join('')}
+                        </div>
                     </div>
                 </div>
-            </div>
-        `).join('');
+            `;
+        }).join('');
 
     } catch (err) {
         console.error("Erro ao explorar:", err);
