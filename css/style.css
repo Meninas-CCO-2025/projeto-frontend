@@ -1514,3 +1514,37 @@ body {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+ /* Estilos específicos para as setas de navegação da vitrine no index */
+    .vitrine-container {
+        position: relative;
+        display: flex;
+        align-items: center;
+    }
+    .btn-scroll {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(30, 27, 46, 0.8);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: white;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 10;
+        transition: 0.3s;
+    }
+    .btn-scroll:hover {
+        background: var(--accent);
+    }
+    .btn-left { left: -20px; }
+    .btn-right { right: -20px; }
+    
+    /* Ajuste para não quebrar o layout mobile */
+    @media (max-width: 768px) {
+        .btn-scroll { display: none; }
+    }
