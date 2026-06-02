@@ -1,8 +1,8 @@
 # Dependências 
-node_modules
+node_modules/
 
 # Configurações do VS Code
-.vscode
+.vscode/
 
 # Arquivos do sistema
 Thumbs.db
