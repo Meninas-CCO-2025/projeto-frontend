@@ -12,5 +12,8 @@
   "type": "commonjs",
   "devDependencies": {
     "cypress": "^15.14.2"
+  },
+  "dependencies": {
+    "bootstrap-icons": "^1.13.1"
   }
 }

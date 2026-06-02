@@ -1,4 +1,4 @@
-# 🎵 Vinyl - Letterbox de Música
+guu# 🎵 Vinyl - Letterbox de Música
 
 ## 📌 Descrição do Projeto
 
