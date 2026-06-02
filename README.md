@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-# 🎵 Vinyl - Letterbox de Música
-=======
-guu# 🎵 Vinyl - Letterbox de Música
->>>>>>> V-9.0
+# 🎵 Vinyl - Letterbox de Músicq
 
 ## 📌 Descrição do Projeto
 
