@@ -1,3 +1,12 @@
+// Teste de Carregamento da Página Inicial 
+// Teste de Navegação para a Tela de Cadastro 
+// Teste de Preenchimento do Formulário de Cadastro
+// Teste de Verificação do Menu Principal
+// Teste de Verificação do Texto Principal
+// Teste de Interação com um Card de Música
+
+// npx serve . -1 3000
+
 describe('Fluxo do site', () => {
 
   it('Acessa a página inicial', () => {
