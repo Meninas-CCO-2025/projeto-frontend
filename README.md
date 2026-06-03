@@ -1,4 +1,3 @@
-=======
 # 🎵 Vinyl - Letterbox de Música
 
 ## 📌 Descrição do Projeto
