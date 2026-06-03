@@ -1,6 +1,10 @@
 # Dependências 
 node_modules/
 
+# Pastas de teste e log
+cypress/screenshots/
+cypress/videos/
+
 # Configurações do VS Code
 .vscode/
 

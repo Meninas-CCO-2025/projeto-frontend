@@ -1,0 +1,198 @@
+/* =====================================================
+   1. VARIÁVEIS E RESET
+   ===================================================== */
+:root {
+  /* Cores Principais */
+  --bg-body: #0f0c1d;
+  --bg-card: #1e1b2e;
+  --accent: #e81856;
+  --text-main: #ffffff;
+  --text-muted: #a89ec9;
+  --btn: #e81856;
+
+  /* Cores de Apoio */
+  --input-bg: #2a2540;
+  --border-color: #4a3f80;
+  --card-shadow: rgba(0, 0, 0, 0.4);
+
+  /* Aliases para compatibilidade */
+  --bg: var(--bg-body);
+  --bg2: rgba(15, 12, 29, 0.8);
+  --card-bg: var(--bg-card);
+}
+
+/* =====================================================
+   2. APLICAÇÃO PRINCIPAL
+   ===================================================== */
+
+/* Body da aplicação */
+body.app-body,
+.app-body {
+  background-color: var(--bg-body);
+  color: var(--text-main);
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  min-height: 100vh;
+  display: block;
+  padding-bottom: 80px;
+}
+
+/* Body padrão (para páginas de auth) */
+body {
+  background: var(--bg);
+  min-height: 100vh;
+  font-family: 'Segoe UI', sans-serif;
+  color: #f0f0f0;
+  display: flex;
+  margin: 0;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* =====================================================
+  3. AUTENTICAÇÃO (LOGIN/CADASTRO)
+   ===================================================== */
+
+/* Container principal de autenticação */
+.auth-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.auth-wrapper {
+  width: 100%;
+  max-width: 420px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Card de autenticação */
+.auth-card {
+  background: var(--card-bg);
+  border-radius: 16px;
+  padding: 32px 28px;
+  box-shadow: 0 8px 32px var(--card-shadow);
+}
+
+/* Logo */
+.logo {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+/* Abas de navegação (Login/Cadastro) */
+.tab-switcher {
+  display: flex;
+  width: 100%;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 20px;
+}
+
+.tab-btn,
+.auth-tab {
+  flex: 1;
+  background: none;
+  border: none;
+  padding: 12px;
+  color: var(--text-muted);
+  font-weight: 600;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: 0.3s;
+  text-align: center;
+}
+
+.tab-btn:hover,
+.auth-tab:hover {
+  color: white;
+}
+
+.tab-btn.active,
+.auth-tab.active {
+  color: var(--accent) !important;
+  border-bottom: 2px solid var(--accent);
+}
+
+/* Texto de apoio */
+.text-muted-custom {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+/* =====================================================
+   4. BOTÕES
+   ===================================================== */
+
+/* Botão primário */
+.btn-primary {
+  background: var(--btn) !important;
+  border: none !important;
+  padding: 10px 20px !important;
+  border-radius: 50px !important;
+  color: #fff !important;
+  font-weight: bold !important;
+  text-decoration: none !important;
+}
+
+.btn-primary:hover {
+  background: var(--accent) !important;
+}
+
+/* =====================================================
+   5. FORMULÁRIOS E INPUTS
+   ===================================================== */
+
+/* Labels */
+.form-label {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  margin-bottom: 4px;
+}
+
+/* Inputs personalizados */
+.custom-input {
+  background: var(--input-bg) !important;
+  border: 1px solid var(--border-color) !important;
+  color: #fff !important;
+  border-radius: 10px !important;
+  padding: 12px 14px !important;
+}
+
+.custom-input:focus {
+  border-color: var(--accent) !important;
+  box-shadow: 0 0 0 3px rgba(255, 99, 71, 0.15) !important;
+}
+
+.custom-input::placeholder {
+  color: #6b5f9e !important;
+}
+
+/* Mensagem de erro */
+.erro-msg {
+  color: var(--accent);
+  font-size: 0.85rem;
+  min-height: 20px;
+}
+
+/* Divisor de seção */
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border-color);
+}

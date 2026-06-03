@@ -1,3 +1,7 @@
+/* ============================================================
+   SISTEMA DE BUSCA (BUSCA.HTML)
+   ============================================================ */
+
 async function buscar() {
     const campo = document.getElementById('campo-busca');
     const container = document.getElementById('resultados');
@@ -13,7 +17,6 @@ async function buscar() {
     }
 
     try {
-        // Faz a busca no Supabase
         const { data: musicas, error } = await conexaoSupabase
             .from('musicas')
             .select('*')
@@ -39,7 +42,7 @@ async function buscar() {
                         <h5 style="color:white; margin:0; font-size:1rem; font-weight:bold;">${m.titulo}</h5>
                         <p style="color:#a89ec9; margin:0; font-size:0.85rem;">${m.artista}</p>
                     </div>
-                    <button onclick="alternarFavorito('${m.id}')" id="btn-fav-${m.id}" style="background:none; border:none; font-size:1.3rem; cursor:pointer;">
+                    <button onclick="alternarFavoritoGlobal('${m.id}')" id="btn-fav-${m.id}" style="background:none; border:none; font-size:1.3rem; cursor:pointer;">
                         ${isFav ? '❤️' : '🤍'}
                     </button>
                 </div>
@@ -51,22 +54,5 @@ async function buscar() {
     }
 }
 
-// Funções de Favoritos para funcionar dentro da busca
-function verificarSeEFavorito(id) {
-    const favs = JSON.parse(localStorage.getItem('meus_favoritos') || '[]');
-    return favs.includes(id);
-}
-
-function alternarFavorito(id) {
-    let favs = JSON.parse(localStorage.getItem('meus_favoritos') || '[]');
-    const btn = document.getElementById(`btn-fav-${id}`);
-    
-    if (favs.includes(id)) {
-        favs = favs.filter(f => f !== id);
-        if(btn) btn.innerText = '🤍';
-    } else {
-        favs.push(id);
-        if(btn) btn.innerText = '❤️';
-    }
-    localStorage.setItem('meus_favoritos', JSON.stringify(favs));
-}
+// Exportar funções para o escopo global
+window.buscar = buscar;
