@@ -1,4 +1,4 @@
-# 🎵 Vinyl - Letterbox de Música
+# 🎵 Vinyl - Letterboxd de Música
 
 ## 📌 Descrição do Projeto
 
@@ -40,8 +40,7 @@ O projeto foi desenvolvido como atividade da disciplina de **Programação Front
 
 ## 🌐 Site em Produção
 
-**Acesse o projeto:** 
-Link :https://lemon-grass-0b892fb10.7.azurestaticapps.net/
+**Acesse o projeto:** https://lemon-grass-0b892fb10.7.azurestaticapps.net/
 
 ---
 
