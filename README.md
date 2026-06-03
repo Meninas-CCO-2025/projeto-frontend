@@ -29,8 +29,9 @@ O projeto foi desenvolvido como atividade da disciplina de **Programação Front
 * Bootstrap
 
 ### DevOps & CI/CD
-* Git & GitHub
-* GitHub Actions
+* Git & GitHub -> Versionamento
+* GitHub Actions -> CI e CD
+* Azure Web Apps - Hospedagem
 
 ### Testes
 * Cypress (Testes End-to-End)
@@ -40,7 +41,7 @@ O projeto foi desenvolvido como atividade da disciplina de **Programação Front
 ## 🌐 Site em Produção
 
 **Acesse o projeto:** 
-LINK DO PROJETO EM BREVE
+Link :https://lemon-grass-0b892fb10.7.azurestaticapps.net/
 
 ---
 
@@ -48,40 +49,60 @@ LINK DO PROJETO EM BREVE
 
 ```text
 vinyl/
-│
-├── .github/
-│   └── workflows/
-│       ├── ci.yml             # Pipeline de Integração Contínua
-│       └── cd.yml             # Pipeline de Entrega Contínua
-│
-├── css/
-│   └── style.css              # Estilização global da aplicação
-│
-├── cypress/                   # Estrutura de testes automatizados
-│   ├── e2e/                   # Arquivos de testes de ponta a ponta
-│   ├── fixtures/              # Dados estáticos para os testes
-│   └── support/               # Suporte e comandos customizados do Cypress
-│
-├── js/                        # Scripts e lógica em JavaScript
-│   ├── busca.js
-│   ├── explorar.js
-│   ├── main.js
-│   ├── perfil.js
-│   └── reviews.js
-│
-├── pages/                     # Páginas secundárias da aplicação
-│   ├── busca.html
-│   ├── explorar.html
-│   ├── perfil.html
-│   └── reviews.html
-│
-├── app.html                   # Dashboard / Tela principal pós-login
-├── index.html                 # Página de entrada (Landing Page)
-├── login.html                 # Página de autenticação
-├── cypress.config.js          # Configurações do Cypress
-|── package.json               # Configurações, scripts e dependências
-|── package-lock.json          # Trava de versões das dependências
-└── README.md                  # Documentação do projeto          
+|   .gitignore
+|   app.html
+|   cypress.config.js
+|   index.html
+|   login.html
+|   package-lock.json
+|   package.json
+|   README.md
+|   
++---.github
+|   \---workflows
+|           azure-static-web-apps-lemon-grass-0b892fb10.yml
+|           
++---.vscode
+|       settings.json
+|       
++---css
+|       app.css
+|       busca.css
+|       explorar.css
+|       index.css                                                                                                                                          
+|       login.css                                                                                                                                          
+|       perfil.css                                                                                                                                         
+|       reviews.css                                                                                                                                        
+|       style.css                                                                                                                                          
+|                                                                                                                                                          
++---cypress                                                                                                                                                
+|   +---e2e                                                                                                                                                
+|   |       fluxos.cy.js                                                                                                                                   
+|   |                                                                                                                                                      
+|   +---fixtures                                                                                                                                           
+|   |       example.json                                                                                                                                   
+|   |                                                                                                                                                      
+|   \---support                                                                                                                                            
+|           commands.js                                                                                                                                    
+|           e2e.js                                                                                                                                         
+|                                                                                                                                                          
++---js                                                                                                                                                     
+|       app.js                                                                                                                                             
+|       busca.js                                                                                                                                           
+|       explorar.js                                                                                                                                        
+|       favoritos.js                                                                                                                                       
+|       main.js                                                                                                                                            
+|       perfil.js                                                                                                                                          
+|       reviews.js                                                                                                                                         
+|       utils.js                                                                                                                                           
+|                                                                                                                                                          
+\---pages                                                                                                                                                  
+        busca.html                                                                                                                                         
+        explorar.html                                                                                                                                      
+        favoritos.html                                                                                                                                     
+        perfil.html                                                                                                                                        
+        reviews.html                                                                                                                                       
+                               
 ```
 
 ## 📌 Integrantes
@@ -90,3 +111,4 @@ vinyl/
 * Giovana de Godoy Felisbino - 2507579
 * Giovanna Falgetano - 2512938
 * Glória Mariano - 2504112
+* Lais da Rosa Câmara - 2505420
