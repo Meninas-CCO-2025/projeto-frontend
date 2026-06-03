@@ -338,3 +338,4 @@ window.removerFavorito = (id) => {
     document.getElementById(`fav-${id}`).remove();
     atualizarContadorFavoritos();
 };
+

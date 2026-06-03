@@ -5,10 +5,10 @@
     /* Cores Principais */
     --bg-body: #0f0c1d;
     --bg-card: #1e1b2e;
-    --accent: #e81856;
+    --accent: #e8e818;
     --text-main: #ffffff;
     --text-muted: #a89ec9;
-    --btn: #e81856;
+    --btn: #e8e118;
 
     /* Cores de Apoio */
     --input-bg: #2a2540;
@@ -303,6 +303,6 @@ body {
 }
 
 .btn-danger-custom:hover {
-    background: #a80030 !important;
+    background: #92a800 !important;
 }
 
